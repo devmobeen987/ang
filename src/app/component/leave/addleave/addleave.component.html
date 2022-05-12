@@ -1,0 +1,113 @@
+
+<div class="container">
+    <!-- <div class="card my-3">
+        <div class="card-header">
+            <h1>Add Leaves</h1>
+        </div>
+        <div class="card-body">
+            <form   [formGroup]="add_leave">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Day's</h4>
+                        <mat-form-field  appearance="fill">
+                            <mat-label>Day's</mat-label>
+                            <input type="text" matInput formControlName="day" >
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Choose From Date</h4>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose From Date</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="fromDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose To Date</mat-label>
+                            <input matInput [matDatepicker]="picker"  formControlName="toDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Status</h4>
+                            <mat-form-field appearance="fill">
+                            <mat-label>Status</mat-label>
+                            <mat-select formControlName="status">
+                              <mat-option value="Approved">Approved </mat-option>
+                              <mat-option value="UnApproved">UnApproved </mat-option>
+                            </mat-select>
+                            </mat-form-field>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-2">
+                        <button type="submit" (click)="submit()" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div> -->
+
+    <mat-card class="example-card card">
+        <mat-card-header>
+            <h1>Add Leaves</h1>
+        </mat-card-header>
+        <mat-card-content>
+            <form   [formGroup]="add_leave">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Day's</h4>
+                        <mat-form-field  appearance="fill">
+                            <mat-label>Day's</mat-label>
+                            <input type="text" matInput formControlName="day" >
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Choose From Date</h4>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose From Date</mat-label>
+                            <input matInput [matDatepicker]="frompicker" formControlName="fromDate">
+                            <mat-datepicker-toggle matSuffix [for]="frompicker"></mat-datepicker-toggle>
+                            <mat-datepicker #frompicker></mat-datepicker>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Choose To Date</h4>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose To Date</mat-label>
+                            <input matInput [matDatepicker]="todatepicker"  formControlName="toDate">
+                            <mat-datepicker-toggle matSuffix [for]="todatepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #todatepicker></mat-datepicker>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field  appearance="fill">
+                            <mat-label>Reason textarea</mat-label>
+                             
+                          </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+       
+          <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+       
+    </mat-card>
+</div>

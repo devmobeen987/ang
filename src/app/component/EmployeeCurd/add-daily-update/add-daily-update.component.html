@@ -1,0 +1,56 @@
+
+<div class="container">
+    <div class="card my-3">
+        <div class="card-header">
+            <h1>Employee Daily Update</h1>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="employee_daily_update">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="starttime" class="form-label" >Start Time</label>
+                                    <input type="time" class="form-control" formControlName="starttime">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="endtime" class="form-label" >End Time</label>
+                                    <input type="time" class="form-control"  formControlName="endtime">
+                                </div>
+                            </div>
+                            
+                        </div>
+                       
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Choose To Date</h4>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Choose Date</mat-label>
+                                    <input matInput [matDatepicker]="datepicker"  formControlName="date">
+                                    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #datepicker></mat-datepicker>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row my-2 mx-1">
+                            <label for="update" class="form-label">Daily Update</label>
+                            <textarea  name="update" rows="8"  class="form-control" formControlName="update">
+                            </textarea>
+                        </div>
+
+                        <div class="row mt-2 mx-3">
+                            <div class="col-md-6">
+                                <button type="submit" (click)="update()" mat-raised-button color="primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </form>
+        </div>
+
+    </div>
+</div>

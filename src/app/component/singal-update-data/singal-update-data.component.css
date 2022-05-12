@@ -1,0 +1,13 @@
+.example-card {
+    max-width: 500px;
+  }
+  
+  .img{
+    border-radius: 0% !important;
+  }
+  .floatleft{
+      float: left;
+  }
+  .floatright{
+      float: right;
+  }

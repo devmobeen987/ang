@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="card my-3">
+        <div class="card-header">
+            <h1>Register</h1>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="add_admin_form ">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" formControlName="name">
+
+                    </div>
+                    <div class="col-md-3">
+                        <label for="username" class="form-label">UserName</label>
+                        <input type="text" class="form-control" formControlName="username">
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">Company EMAIL</label>
+                        <input type="text" class="form-control" formControlName="email">
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-md-6">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" formControlName="address">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" formControlName="password">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="c_password" class="form-label">C_Password</label>
+                        <input type="password" class="form-control" formControlName="c_password">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-2">
+                        <button type="submit" (click)="submit()" mat-raised-button color="primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

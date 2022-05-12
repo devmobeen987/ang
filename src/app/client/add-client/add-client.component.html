@@ -1,0 +1,171 @@
+
+<div class="container aling-center">
+    <!-- <div class="card my-3">
+        <div class="card-header">
+            <h1>Add Client</h1>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="add_client_form" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="firstname" class="form-label">firstname</label>
+                        <input type="text" class="form-control" formControlName="firstname">
+                    </div>
+                     <div class="col-md-6">
+                        <label for="lastname" class="form-label">lastname</label>
+                        <input type="text" class="form-control" formControlName="lastname">
+                    </div> 
+                </div>
+                <div class="row my-1">
+                    <div class="col-md-12">
+                        <label for="email" class="form-label">EMAIL</label>
+                        <input type="text" class="form-control" formControlName="email">
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-md-12">
+                        <label for="address" class="form-label">Country</label>
+                        <input type="text" class="form-control" formControlName="country">
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-md-12">
+                        <label for="experience" class="form-label">Tecnology</label>
+                        <input type="text" class="form-control" formControlName="tecnology">
+                    </div>
+                </div>
+                <div class="row my-2">
+                    <div class="col-md-12">
+                        <label for="status">Status Type </label>
+                        <select class="form-select mt-2" formControlName="status">
+                            <option value="">Chosee Type</option>
+                            <option value="Active">Active</option>
+                            <option value="EnActive">EnActive</option>
+                          </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Choose Start Date</h4>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose Date</mat-label>
+                            <input matInput [matDatepicker]="datepicker"  formControlName="startdate">
+                            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker></mat-datepicker>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Choose End Date</h4>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose To Date</mat-label>
+                            <input matInput [matDatepicker]="todatepicker"  formControlName="endDate">
+                            <mat-datepicker-toggle matSuffix [for]="todatepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #todatepicker></mat-datepicker>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-4">
+                        <button type="submit" (click)="submit()" mat-raised-button color="primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div> -->
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <mat-card class="example-card my-3 w-100">
+                <mat-card-header class="header_color" >
+                    <h1 class="my-2">Add Client</h1>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="add_client_form" enctype="multipart/form-data">
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label for="firstname" class="form-label">First Name</label>
+                                <input type="text" class="form-control" formControlName="firstname">
+                            </div>
+                             <div class="col-md-6">
+                                <label for="lastname" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" formControlName="lastname">
+                            </div> 
+                        </div>
+                        <div class="row my-1">
+                            <div class="col-md-12">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" class="form-control" formControlName="email">
+                            </div>
+                        </div>
+                        <div class="row my-1">
+                            <div class="col-md-12">
+                                <label for="address" class="form-label">Country</label>
+                                <input type="text" class="form-control" formControlName="country">
+                            </div>
+                        </div>
+                        <div class="row my-1">
+                            <div class="col-md-12">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Tecnology</mat-label>
+                                    <mat-select formControlName="tecnology" multiple>
+                                      <mat-option  value="HTML">HTML</mat-option>
+                                      <mat-option  value="PHP">PHP</mat-option>
+                                      <mat-option  value="LARAVEL">LARAVEL</mat-option>
+                                      <mat-option  value="JAVA/SCRIPT">JAVA SCRIPT</mat-option>
+                                      <mat-option  value="ANGULAR/JS">ANGULAR JS</mat-option>
+                                      <mat-option  value="VIEW/JS">VIEW JS</mat-option>
+                                      <mat-option  value="REACT/JS">REACT JS</mat-option>
+                                      <mat-option  value="NOTE/JS">NOTE JS</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-12">
+                                <label for="status">Status Type </label>
+                                <select class="form-select mt-2" formControlName="status">
+                                    <option value="">Chosee Type</option>
+                                    <option value="active">Active</option>
+                                    <option value="inactive">InActive</option>
+                                  </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Choose Start Date</h4>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Choose Date</mat-label>
+                                    <input matInput [matDatepicker]="datepicker"  formControlName="startdate">
+                                    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #datepicker></mat-datepicker>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Choose End Date</h4>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Choose To Date</mat-label>
+                                    <input matInput [matDatepicker]="todatepicker"  formControlName="endDate">
+                                    <mat-datepicker-toggle matSuffix [for]="todatepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #todatepicker></mat-datepicker>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                <button type="submit" (click)="submit()" mat-raised-button color="primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+   
+</div>

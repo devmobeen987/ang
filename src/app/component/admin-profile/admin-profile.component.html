@@ -1,0 +1,20 @@
+<div class="container justify-content-center mt-4">
+    <div class="card" style="width: 35rem;">
+        <h4 class="mx-3 mt-3">Company Name :{{userdata.name}}</h4>
+        <div class="card-body">
+          <h4 class="card-title">Company Email: {{userdata.username}}</h4>
+          <p class="card-text"> Company status: Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <div *ngIf="role=='employee'">
+            <a [routerLink]="['/employee/update']">
+              <button type="button" class="btn btn-info mx-4 my-3">EditEmployeProfile</button>
+            </a>
+        </div>
+        <div *ngIf="role=='company'">
+            <a [routerLink]="['/edit']">
+              <button type="button" class=" mx-4 my-3" mat-raised-button color="primary">EditCompanyProfile</button>
+            </a>
+        </div>
+      </div>
+</div>
+

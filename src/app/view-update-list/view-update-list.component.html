@@ -1,0 +1,60 @@
+
+<div class="container">
+    <mat-card class="example-card">
+        <mat-card-header class="d-flex justify-content-between">
+          <mat-card-title>
+                <p>Employee Daily Update List</p>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table mat-table matSort [dataSource]="workupdate"  class="mat-elevation-z8 w-100"   >
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="name" *ngIf="role=='company'" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+                <td mat-cell *matCellDef="let item"> {{item.firstname}}{{item.lastname}} </td>
+              </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+                <td mat-cell *matCellDef="let item"> {{item.date}} </td>
+              </ng-container>
+            
+              <!-- Weight Column -->
+              <ng-container matColumnDef="starttime">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Time</th>
+                <td mat-cell *matCellDef="let item"> {{item.starttime}} </td>
+              </ng-container>
+            
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="endtime">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>End Time</th>
+                <td mat-cell *matCellDef="let item">{{item.endtime}}</td>
+              </ng-container>
+              
+              <ng-container matColumnDef="update">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Update</th>
+                <td mat-cell *matCellDef="let item">{{item.update}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Action" *ngIf="role=='company'">
+                <th mat-header-cell *matHeaderCellDef>Action</th>
+                <td mat-cell  *matCellDef="let item" >
+                  <a [routerLink]="['/singalupdatedata',item.id]" >
+                    <button mat-raised-button color="accent">View More</button>
+                    </a>
+                </td>
+              </ng-container>
+    
+              <tr mat-header-row *matHeaderRowDef="headercolumn"></tr>
+              <tr mat-row *matRowDef="let row; columns:headercolumn"></tr>
+            </table>
+            <mat-paginator #Paginator length="3" [pageSizeOptions]="[3,5, 10, 20]" showFirstLastButtons >
+            </mat-paginator>
+        </mat-card-content>
+      </mat-card>
+
+
+</div>
+
