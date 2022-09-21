@@ -1,0 +1,63 @@
+
+<div class="container card_width my-3">
+  <mat-card class="example-card">
+    <mat-card-header class="d-flex justify-content-between">
+      <mat-card-title>
+        <h1 ><b> View full  Income details </b> </h1>
+      </mat-card-title>
+      <div class="row mt-0">
+        <div class="col-md-3 offset-md-3"></div>
+        <div class="col-md-3 offset-md-3">
+          <div class="example-button-container">
+            <button mat-mini-fab (click)="onNoClick()">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="my-3">
+          <a [routerLink]="['/income/add']" >
+          <button mat-raised-button color="warn">Add+</button>
+          </a>
+      </div> -->
+    </mat-card-header>
+    <mat-card-content>
+      <table class="table table-bordered">
+        <thead class="table_thcolor">
+          <tr>
+            <td>Client Name</td>
+            <td>Email</td>
+            <td>Address</td>
+            <td>Amount</td>
+            <td>TDS</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+            <td>Discription</td>
+            <td>Client Discription</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let val of listClientData ">
+            <td>{{val.clientname}}</td>
+            <td>{{val.email}}</td>
+            <td>{{val.country}}</td>
+            <td>{{val.amount}}</td>
+            <td>{{val.tds}}</td>
+            <td>{{val.startdate}}</td>
+            <td>{{val.enddate}}</td>
+            <td>{{val.discription}}</td>
+            <td>{{val.compdis}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <div class="row close_btn">
+    <div class="mt-3">
+      <button mat-raised-button  color="accent" (click)="onNoClick()">Close</button>
+    </div>
+  </div>
+</div>
+
+
+

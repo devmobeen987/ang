@@ -6,7 +6,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-edit-client',
   templateUrl: './edit-client.component.html',
-  styleUrls: ['./edit-client.component.css']
+  styleUrls: ['./edit-client.component.scss']
 })
 export class EditClientComponent implements OnInit {
 
@@ -19,7 +19,8 @@ export class EditClientComponent implements OnInit {
     status:[''],
     startdate:[''],
     enddate:[''],
-  })
+  });
+  public tecnologyvalue:any= ['HTML','PHP','LARAVEL','JAVA/SCRIPT','ANGULAR/JS','VIEW/JS','REACT/JS','NOTE/JS'];
   public id:any;
   constructor(private fb:FormBuilder, public api:AdminService, public router: Router,private route: ActivatedRoute) { }
 
@@ -27,7 +28,12 @@ export class EditClientComponent implements OnInit {
     this.route.params.subscribe((data:any)=>{
       this.id = data.id;
       console.log('s',this.id);
-    })
+    },err=>{
+      if(err.status=='401'){
+        this.router.navigate(['/auth/login']);
+      }
+    });
+
     this.api.viewSingalClient(this.id).subscribe((val:any)=>{
         console.log(val);
         this.edit_client_form.patchValue({
@@ -40,6 +46,10 @@ export class EditClientComponent implements OnInit {
           startdate:val.success.startdate,
           enddate:val.success.enddate,
         })
+    },err=>{
+      if(err.status=='401'){
+        this.router.navigate(['/auth/login']);
+      }
     });
   }
 
@@ -71,6 +81,10 @@ export class EditClientComponent implements OnInit {
       console.log(data);
       alert(data.msg);
       this.router.navigate(['/client/list']);
+    },err=>{
+      if(err.status=='401'){
+        this.router.navigate(['/auth/login']);
+      }
     })
 
 

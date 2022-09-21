@@ -6,7 +6,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-login-admin',
   templateUrl: './login-admin.component.html',
-  styleUrls: ['./login-admin.component.css']
+  styleUrls: ['./login-admin.component.scss']
 })
 export class LoginAdminComponent implements OnInit {
 
@@ -26,12 +26,17 @@ export class LoginAdminComponent implements OnInit {
       this.apiservice.username.next(data.success.name);
       this.apiservice.token.next(data.success.token);
       this.apiservice.role.next(data.success.role);
-      
       localStorage.setItem('token',data.success.token);
       localStorage.setItem('role',data.success.role);
       localStorage.setItem('name',data.success.name);
       localStorage.setItem('compID',data.success.companyID);
       this.router.navigate(['/profile']);
+    },
+    err=>{
+      console.log('dkd',err);
+          if(err.status=='401'){
+            this.router.navigate(['/auth/login']);
+          }
     });
 
   }

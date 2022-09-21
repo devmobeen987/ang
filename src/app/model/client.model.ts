@@ -27,5 +27,9 @@ export interface Clientlist {
     type: string;
     msg: string;
     
+  } 
+  export interface clientlistApireq {
+    success:Clientlist[];
+    
   }
 

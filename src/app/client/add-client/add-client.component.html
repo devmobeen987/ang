@@ -1,81 +1,5 @@
 
 <div class="container aling-center">
-    <!-- <div class="card my-3">
-        <div class="card-header">
-            <h1>Add Client</h1>
-        </div>
-        <div class="card-body">
-            <form [formGroup]="add_client_form" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="firstname" class="form-label">firstname</label>
-                        <input type="text" class="form-control" formControlName="firstname">
-                    </div>
-                     <div class="col-md-6">
-                        <label for="lastname" class="form-label">lastname</label>
-                        <input type="text" class="form-control" formControlName="lastname">
-                    </div> 
-                </div>
-                <div class="row my-1">
-                    <div class="col-md-12">
-                        <label for="email" class="form-label">EMAIL</label>
-                        <input type="text" class="form-control" formControlName="email">
-                    </div>
-                </div>
-                <div class="row my-1">
-                    <div class="col-md-12">
-                        <label for="address" class="form-label">Country</label>
-                        <input type="text" class="form-control" formControlName="country">
-                    </div>
-                </div>
-                <div class="row my-1">
-                    <div class="col-md-12">
-                        <label for="experience" class="form-label">Tecnology</label>
-                        <input type="text" class="form-control" formControlName="tecnology">
-                    </div>
-                </div>
-                <div class="row my-2">
-                    <div class="col-md-12">
-                        <label for="status">Status Type </label>
-                        <select class="form-select mt-2" formControlName="status">
-                            <option value="">Chosee Type</option>
-                            <option value="Active">Active</option>
-                            <option value="EnActive">EnActive</option>
-                          </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>Choose Start Date</h4>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Choose Date</mat-label>
-                            <input matInput [matDatepicker]="datepicker"  formControlName="startdate">
-                            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-                            <mat-datepicker #datepicker></mat-datepicker>
-                          </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>Choose End Date</h4>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Choose To Date</mat-label>
-                            <input matInput [matDatepicker]="todatepicker"  formControlName="endDate">
-                            <mat-datepicker-toggle matSuffix [for]="todatepicker"></mat-datepicker-toggle>
-                            <mat-datepicker #todatepicker></mat-datepicker>
-                          </mat-form-field>
-                    </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-4">
-                        <button type="submit" (click)="submit()" mat-raised-button color="primary">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-    </div> -->
-
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
@@ -88,23 +12,32 @@
                         <div class="row mt-3">
                             <div class="col-md-6">
                                 <label for="firstname" class="form-label">First Name</label>
-                                <input type="text" class="form-control" formControlName="firstname">
+                                <input type="text" class="form-control" formControlName="firstname" [class.is-invalid]="add_client_form.get('firstname')?.invalid && add_client_form.get('firstname')?.touched " >
+
+                                <span *ngIf="add_client_form.get('firstname')?.invalid && add_client_form.get('firstname')?.touched" class="text-danger mt-2">First Name is Required</span>
                             </div>
                              <div class="col-md-6">
                                 <label for="lastname" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" formControlName="lastname">
+                                <input type="text" class="form-control" formControlName="lastname" [class.is-invalid]="add_client_form.get('lastname')?.invalid && add_client_form.get('lastname')?.touched ">
+
+                                <span *ngIf="add_client_form.get('lastname')?.invalid && add_client_form.get('lastname')?.touched" class="text-danger mt-2">Last Name is Required</span>
                             </div> 
                         </div>
                         <div class="row my-1">
                             <div class="col-md-12">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" formControlName="email">
+                                <input type="text" class="form-control" formControlName="email" [class.is-invalid]="add_client_form.get('email')?.invalid && add_client_form.get('email')?.touched ">
+
+                                <span *ngIf="add_client_form.get('email')?.invalid && add_client_form.get('email')?.touched" class="text-danger mt-2">Email Field is Required</span>
                             </div>
                         </div>
                         <div class="row my-1">
                             <div class="col-md-12">
                                 <label for="address" class="form-label">Country</label>
-                                <input type="text" class="form-control" formControlName="country">
+                                <input type="text" class="form-control" formControlName="country" [class.is-invalid]="add_client_form.get('country')?.invalid && add_client_form.get('country')?.touched ">
+
+                                <span *ngIf="add_client_form.get('country')?.invalid && add_client_form.get('country')?.touched" class="text-danger mt-2">Country Field is Required</span>
+
                             </div>
                         </div>
                         <div class="row my-1">
@@ -127,7 +60,7 @@
                         <div class="row my-2">
                             <div class="col-md-12">
                                 <label for="status">Status Type </label>
-                                <select class="form-select mt-2" formControlName="status">
+                                <select class="form-select mt-2" formControlName="status" [class.is-invalid]="add_client_form.get('status')?.invalid && add_client_form.get('status')?.touched">
                                     <option value="">Chosee Type</option>
                                     <option value="active">Active</option>
                                     <option value="inactive">InActive</option>
@@ -139,7 +72,7 @@
                                 <h4>Choose Start Date</h4>
                                 <mat-form-field appearance="fill">
                                     <mat-label>Choose Date</mat-label>
-                                    <input matInput [matDatepicker]="datepicker"  formControlName="startdate">
+                                    <input matInput [matDatepicker]="datepicker"  formControlName="startdate" required>
                                     <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
                                     <mat-datepicker #datepicker></mat-datepicker>
                                   </mat-form-field>

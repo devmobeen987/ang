@@ -7,11 +7,11 @@
             <form [formGroup]="add_employee_form" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="firstname" class="form-label">firstname</label>
+                        <label for="firstname" class="form-label">First Name</label>
                         <input type="text" class="form-control" formControlName="firstname">
                     </div>
                      <div class="col-md-3">
-                        <label for="lastname" class="form-label">lastname</label>
+                        <label for="lastname" class="form-label">Last Name</label>
                         <input type="text" class="form-control" formControlName="lastname">
                     </div> 
                    
@@ -25,7 +25,7 @@
                 </div>
                 <div class="row my-1">
                     <div class="col-md-6">
-                        <label for="email" class="form-label">EMAIL</label>
+                        <label for="email" class="form-label">Email</label>
                         <input type="text" class="form-control" formControlName="email">
                     </div>
                 </div>
@@ -40,6 +40,13 @@
                     <div class="col-md-6">
                         <label for="image" class="form-label">Upload Image</label>
                         <input type="file" class="form-control" name="image" id="image" (change)="onFileSelected($event)" >
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="image" class="form-label">Employee Join Date</label>
+                        <input type="date" class="form-control" id="joining_date" formControlName="joining_date" >
                     </div>
                 </div>
 

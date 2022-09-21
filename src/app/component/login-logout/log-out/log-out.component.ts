@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-log-out',
   templateUrl: './log-out.component.html',
-  styleUrls: ['./log-out.component.css']
+  styleUrls: ['./log-out.component.scss']
 })
 export class LogOutComponent implements OnInit {
 

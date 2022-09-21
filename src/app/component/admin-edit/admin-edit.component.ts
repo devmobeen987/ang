@@ -6,7 +6,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-admin-edit',
   templateUrl: './admin-edit.component.html',
-  styleUrls: ['./admin-edit.component.css']
+  styleUrls: ['./admin-edit.component.scss']
 })
 export class AdminEditComponent implements OnInit {
 
@@ -44,7 +44,12 @@ export class AdminEditComponent implements OnInit {
        address:element.success.address,
        username:element.success.username,
       })  
-    })
+    },
+    err=>{
+      if(err.status=='401'){
+        this.router.navigate(['/auth/login']);
+      }
+    });
     // this.apiservice.getsingalUsersdata().subscribe((element:any)=>{
     //   console.log('ghh',element.success);
       
@@ -66,7 +71,12 @@ export class AdminEditComponent implements OnInit {
          alert('Data Is Updated');
          this.router.navigate(['/profile']);
     
-       })
+       },
+       err=>{
+        if(err.status=='401'){
+          this.router.navigate(['/auth/login']);
+        }
+      })
     }else{
         this.valid = true;
     }

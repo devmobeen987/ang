@@ -4,7 +4,7 @@ import { AdminService } from '../service/admin.service';
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.css']
+  styleUrls: ['./company.component.scss']
 })
 export class CompanyComponent implements OnInit {
   public headercolumn: string[] = [

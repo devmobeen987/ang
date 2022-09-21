@@ -35,14 +35,7 @@
                                 <mat-form-field appearance="fill">
                                     <mat-label>Tecnology</mat-label>
                                     <mat-select formControlName="tecnology" multiple>
-                                      <mat-option  value="HTML">HTML</mat-option>
-                                      <mat-option  value="PHP">PHP</mat-option>
-                                      <mat-option  value="LARAVEL">LARAVEL</mat-option>
-                                      <mat-option  value="JAVA/SCRIPT">JAVA SCRIPT</mat-option>
-                                      <mat-option  value="ANGULAR/JS">ANGULAR JS</mat-option>
-                                      <mat-option  value="VIEW/JS">VIEW JS</mat-option>
-                                      <mat-option  value="REACT/JS">REACT JS</mat-option>
-                                      <mat-option  value="NOTE/JS">NOTE JS</mat-option>
+                                      <mat-option  [value]="val" *ngFor="let val of tecnologyvalue">{{val}}</mat-option>
                                     </mat-select>
                                   </mat-form-field>
                             </div>

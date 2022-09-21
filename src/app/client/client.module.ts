@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { DashbordCardModule } from '../component/dashbord-card/dashbord-card.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { DashbordCardModule } from '../component/dashbord-card/dashbord-card.mod
     MatButtonModule,
     MatCardModule,
     MatSelectModule,
+    MatSnackBarModule,
    //
    MatDialogModule,
    MatTableModule,

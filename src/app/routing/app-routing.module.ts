@@ -24,7 +24,12 @@ const routes: Routes = [
   { path: 'employee', loadChildren: () => import('../component/EmployeeCurd/employee.module').then(m => m.EmployeeModule)},
   { path: 'leave', loadChildren: () => import('../component/leave/leaves.module').then(m => m.LeavesModule) },
   { path: 'auth', loadChildren: () => import('../component/login-logout/login-logout.module').then(m => m.LoginLogoutModule) },
-  { path: 'client', loadChildren: () => import('../client/client.module').then(m =>m.ClientModule)}
+  { path: 'client', loadChildren: () => import('../client/client.module').then(m =>m.ClientModule)},
+  { path: 'project', loadChildren: () => import('../project/project.module').then(m =>m.ProjectModule)},
+  { path: 'income', loadChildren: () => import('../income/income.module').then(m =>m.IncomeModule)},
+  { path: 'expanse', loadChildren: () => import('../expanse/expanse.module').then(m =>m.ExpanseModule)},
+  { path: 'account', loadChildren: () => import('../account/account.module').then(m =>m.AccountModule)},
+  { path: 'incomedashbord', loadChildren: () => import('../component/income-dashboard/income-dashboard.module').then(m =>m.IncomeDashboardModule)},
 ];
 
 @NgModule({

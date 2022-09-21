@@ -7,7 +7,7 @@ import { AdminService } from '../service/admin.service';
 @Component({
   selector: 'app-view-update-list',
   templateUrl: './view-update-list.component.html',
-  styleUrls: ['./view-update-list.component.css']
+  styleUrls: ['./view-update-list.component.scss']
 })
 export class ViewUpdateListComponent implements OnInit {
   @Input() item:any;

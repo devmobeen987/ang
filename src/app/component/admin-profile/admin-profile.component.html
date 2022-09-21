@@ -1,9 +1,22 @@
 <div class="container justify-content-center mt-4">
     <div class="card" style="width: 35rem;">
-        <h4 class="mx-3 mt-3">Company Name :{{userdata.name}}</h4>
+      
+        <h4 class="mx-3 mt-3">
+          <span>
+            Name :{{userdata.name}}
+          </span>
+        </h4>
         <div class="card-body">
-          <h4 class="card-title">Company Email: {{userdata.username}}</h4>
-          <p class="card-text"> Company status: Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h4 class="card-title">
+            <span *ngIf="role=='company'">
+              Company Email: {{userdata.email}}
+            </span> 
+            <span *ngIf="role=='employee'">
+              User Email: {{userdata.email}}
+            </span>
+            
+          </h4>
+          <p class="card-text">I Am full stack devloper but I know very well  frontend but the backend litle bit <b> “someone who can work on both the back-end and front-end of systems.”</b> This means that they can develop fully fledged platforms (with databases, servers and clients) which don't need other applications to function.</p>
         </div>
         <div *ngIf="role=='employee'">
             <a [routerLink]="['/employee/update']">

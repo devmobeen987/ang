@@ -1,0 +1,77 @@
+
+<div class="container aling-center">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <mat-card class="example-card my-3 w-100">
+                <mat-card-header class="header_color" >
+                    <h1 class="my-2">Add Expanse</h1>
+                </mat-card-header>
+                <mat-card-content>
+                    <form [formGroup]="add_expanse_form" enctype="multipart/form-data">
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width"  appearance="fill">
+                                    <mat-label>Amount</mat-label>
+                                    <input matInput  (keypress)="numberOnly($event)"  formControlName="amount" >
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4 ">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Choose Date</mat-label>
+                                    <input matInput [matDatepicker]="datepicker"  formControlName="date">
+                                    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #datepicker></mat-datepicker>
+                                  </mat-form-field>
+                            </div>
+
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Type</mat-label>
+                                    <input matInput   formControlName="type">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <label for="Discription"  class="form-group">Discription</label>
+                                <textarea class="form-control" row="3" formControlName="discription"></textarea>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 mt-2">
+                                <mat-label>Add TDS Amount</mat-label>
+                                <mat-form-field class="example-full-width"  appearance="fill">
+                                    <mat-label>Enter Amount</mat-label>
+                                    <input matInput  formControlName="tds" >
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                <button type="submit" (click)="submit()" mat-raised-button color="primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+   
+</div>
+
+    <!--<div class="row my-2">
+    <mat-form-field appearance="fill">
+    <mat-label>Client Name</mat-label> 
+    <mat-select formControlName="type" > 
+    <mat-option  value="Auto Mobile" >Auto Mobile</mat-option>
+    <mat-option  value="Mobile Phone" > Mobile Phone</mat-option>
+    <mat-option  value="Recharge" >Recharge</mat-option>
+    <mat-option  value="Electricity" >Electricity</mat-option>
+    <mat-option  value="Eclectronic " >Eclectronic</mat-option>
+    </mat-select>
+    </mat-form-field> 
+    </div>-->

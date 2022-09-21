@@ -1,0 +1,50 @@
+
+mat-sidenav-container{
+  height: 100%;
+}
+
+mat-sidenav, mat-sidenav-content{
+  padding: 16px;
+
+}
+mat-sidenav{
+
+    background-color: rgb(122 140 202);
+    width: 200px;
+}
+.nav-link{
+    color: white;
+    cursor: pointer;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .dropdown{
+      background-color: white;
+      color: black;
+      border: 1px solid #ccc;
+      z-index: 100;
+  }
+.f-14{
+  font-size: 13px;
+  font-weight: 100;
+  margin-top: 9px;
+}
+.link{
+  color: white;
+  text-decoration: none;
+}
+
+.color{
+color: bisque;
+}
+
+.bg-color{
+  background: rgb(122 140 202);
+  color: white;
+  }
+.menu_data{
+  cursor: pointer;
+}

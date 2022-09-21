@@ -1,32 +1,47 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute,  Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { LogOutComponent } from '../app/component/login-logout/log-out/log-out.component';
 import { AdminService } from './service/admin.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
    opened =false;
    showdropdown=false;
    username:any = '';
-   token:any;
+   isLogin:any;
    role:any;
-  title = 'angularatendeceproject';
-  employee:number = 0;
-  constructor( public dialog: MatDialog,private api: AdminService, public router: Router) {
+   title = 'angularatendeceproject';
+   employee:number = 0;
+  
+  constructor( public dialog: MatDialog,private api: AdminService, private router: Router, private route: ActivatedRoute,) {
+    
+    
   }
   
   ngOnInit(): void {
+    this.username = localStorage.getItem('name');
+    this.isLogin = localStorage.getItem('token');
+    this.role = localStorage.getItem('role');
+    
+    if(this.isLogin){
+     this.router.navigate(['profile']);
+    }else{
+      this.router.navigate(['auth/login']);
+    }
+
+
     this.api.username.subscribe((name)=>{
       this.username = name;
     });
 
     this.api.token.subscribe((name)=>{
-      this.token = name;
+      this.isLogin = name;
     });
     this.api.role.subscribe((data)=>{
       this.role = data;
@@ -36,23 +51,23 @@ export class AppComponent {
       this.employee = data;
     });
 
-    this.username = localStorage.getItem('name');
-    this.token = localStorage.getItem('token');
-    this.role = localStorage.getItem('role');
-    console.log(this.token);
-    console.log(this.role);
-
-    
   }
+ 
 
   getName(){
-    if (this.router.url.includes("profile")) {
-
-      this.api.gettotalempcount().subscribe((data:any)=>{
-        this.api.totalemployee.next(data.employee);
-   });
-     
-    } else{
+    if (this.router.url.includes("profile")){
+      if(this.role=='company'){
+          this.api.gettotalempcount().subscribe((data:any)=>{
+            this.api.totalemployee.next(data.employee);
+          },
+          err=>{
+            console.log('dkd',err);
+            if(err.status=='401'){
+              this.router.navigate(['/auth/login']);
+            }
+          });
+      }
+    } else {
       console.log('djdj');
     }
   
@@ -78,7 +93,13 @@ export class AppComponent {
           localStorage.removeItem("name");
           localStorage.removeItem("compID");
           this.router.navigate(['/auth/login']);
-        })
+        },
+        err=>{ 
+          console.log('dkd',err);
+          if(err.status=='401'){
+            this.router.navigate(['/auth/login']);
+          }
+        });
       }
     });
   }

@@ -1,0 +1,60 @@
+
+    <mat-card class="example-card my-3 w-100 h-100">
+        <mat-card-header class="header_color" >
+            <h1 class="my-2 header_title"><strong></strong> Expanse List</h1>
+             <div class="d-flex">
+                <div class="mx-3">
+                    <mat-form-field appearance="fill">
+                        <mat-label >Month</mat-label>
+                        <mat-select [(ngModel)]="month" > 
+                            <mat-option [value]="i+1" *ngFor="let val of Month; let i = index" >{{val}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Years</mat-label>
+                        <mat-select [(ngModel)]="years" > 
+                        <mat-option [value]="val" *ngFor='let val of Years ;let i = index'>{{val}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                 <div  class="mx-3"> 
+                    <mat-form-field appearance="fill">
+                        <mat-label>Type</mat-label>
+                        <mat-select [(ngModel)]="type" > 
+                            <mat-option [value]="val" *ngFor='let val of Type'>{{val}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div> 
+                <div class="mx-3">
+                    <button mat-raised-button (click)="filter()" color="accent">Filter</button>
+                </div>
+                <div class="mx-3">
+                    <button mat-raised-button (click)="Clearfilter()" color="primary">Clear Filter</button>
+                </div>
+             </div>
+
+        </mat-card-header>
+        <mat-card-content class=" h-100">
+            <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-3 mb-3">
+                    <a [routerLink]="['/expanse/add']" >
+                        <button mat-raised-button color="warn">Add+</button>
+                    </a>
+                </div>
+            </div>
+            <div class="row h-100 pl-3" style="box-sizing: border-box;">
+                <ag-grid-angular
+                style="width: 90%; height: 70%; margin-left: 70px;"
+                class="ag-theme-alpine"
+                [rowData]="rowData"
+                [columnDefs]="columnDefs"
+                [defaultColDef]="defaultColDef"
+                (gridReady)="onGridReady($event)"
+                 >
+                </ag-grid-angular>
+            </div>
+        </mat-card-content>
+    </mat-card>

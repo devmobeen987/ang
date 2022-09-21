@@ -6,7 +6,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-edit-employee',
   templateUrl: './edit-employee.component.html',
-  styleUrls: ['./edit-employee.component.css']
+  styleUrls: ['./edit-employee.component.scss']
 })
 export class EditEmployeeComponent implements OnInit {
   public edit_employee_form = this.fb.group({
@@ -16,6 +16,7 @@ export class EditEmployeeComponent implements OnInit {
     username:[''],
     address:[''],
     experience:[''],
+    joining_date:[''],
     employeetype:[''],
     status:[''],
     password:[''],
@@ -32,9 +33,7 @@ export class EditEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
        this.id = params.get('id');
-
       console.log(this.id);
-
     });
     this.api.getsingalemployee(this.id).subscribe((val:any)=>{
     
@@ -45,13 +44,21 @@ export class EditEmployeeComponent implements OnInit {
       username:val.success.username,
       address:val.success.address,
       experience:val.success.experience,
+      joining_date:val.success.joining_date,
       employeetype:val.success.employeetype,
       status:val.success.status,
     })
     this.image = val.success.photo;
     console.log('gvh',val);
     console.log('gvh',this.image);
-    });
+    },
+    err=>{
+      console.log('dkd',err);
+          if(err.status=='401'){
+            this.router.navigate(['/auth/login']);
+          }
+    }
+    );
   }
   onFileSelected(e:any){
     this.selectedFile = e.target.files[0];
@@ -73,6 +80,7 @@ export class EditEmployeeComponent implements OnInit {
     paylode.append("username",this.edit_employee_form.value.username);
     paylode.append("address",this.edit_employee_form.value.address);
     paylode.append("experience",this.edit_employee_form.value.experience);
+    paylode.append("joining_date",this.edit_employee_form.value.joining_date);
     paylode.append("employeetype",this.edit_employee_form.value.employeetype);
     paylode.append("status",this.edit_employee_form.value.status);
     paylode.append("date",data);
@@ -81,7 +89,14 @@ export class EditEmployeeComponent implements OnInit {
       console.log(data);
       alert(data.msg);
       this.router.navigate(['/employee/viewemployee']);
-    })
+    },
+    err=>{
+      console.log('dkd',err);
+          if(err.status=='401'){
+            this.router.navigate(['/auth/login']);
+          }
+    });
+
   }
 
   isnotice(e:any){

@@ -5,7 +5,17 @@
     <mat-card class="example-card">
       <mat-card-header class="d-flex justify-content-between">
         <mat-card-title>
-              <p>Client List</p>
+          <div class="d-flex">
+            <p class="mt-2">Client List</p>
+            <div class="autocomplete mx-3" style="width:200px; ">
+              <input  [(ngModel)]="autocompletevalue" (keyup)="getinputdata()" (focus)="showoption()" type="text"  (focusout)="delayoutfocus()" class="form-control">
+            </div>
+          </div>
+          <div *ngIf="isAutocomple" class="droplist">
+            <ng-container >
+              <div (click)="setinputdata(i)" class="pointer" *ngFor="let val of clientnameList; index as i;">{{val.name}}</div>
+            </ng-container>
+          </div>
         </mat-card-title>
         <div class="my-3">
           <a [routerLink]="['/client/add']" >
@@ -26,17 +36,16 @@
             </ng-container>
           
             <!-- Name Column -->
-            <ng-container matColumnDef="firstname">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>FirstName</th>
-              <td mat-cell *matCellDef="let item"> {{item.firstname}} </td>
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Name </th>
+              <td mat-cell *matCellDef="let item"> {{item.name}} </td>
             </ng-container>
           
             <!-- Weight Column -->
-            <ng-container matColumnDef="lastname">
+            <!-- <ng-container matColumnDef="lastname">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>LastName</th>
               <td mat-cell *matCellDef="let item"> {{item.lastname}} </td>
-            </ng-container>
-          
+            </ng-container> -->
             <!-- Symbol Column -->
             <!-- <ng-container matColumnDef="username">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>UserName</th>
@@ -82,7 +91,6 @@
                 <!-- <button class=" mx-2" mat-raised-button color="warn" (click)="delete(item.id)">Delete</button> -->
               </td>
             </ng-container>
-  
             <tr mat-header-row *matHeaderRowDef="headercolumn"></tr>
             <tr mat-row *matRowDef="let row; columns:headercolumn"></tr>
           </table>
@@ -90,6 +98,41 @@
           </mat-paginator>
       </mat-card-content>
     </mat-card>
-     
-           
+
+
+    <div class="row my-3">
+      <h2>Replay subject</h2>
+    </div>
+ 
+    <div class="row">
+      <div>
+        <h3>Add video</h3>
+      </div>
+      <hr>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2">
+        <input type="text" [(ngModel)]="add"  class="form-control">
+        
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-success" (click)="addvideo()">Add Video</button>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-2">
+        <p class="my-2">row 1</p>
+        <div *ngFor="let val of row1">{{val}}</div>
+      </div>
+      <div class="col-md-3">
+        <p class="my-2">row 1</p>
+        <div *ngFor="let val of row2">{{val}}</div>
+        <div>
+          <button class="btn btn-info" (click)="subcribe()">Subcribe</button>
+        </div>
+        
+      </div>
+    </div> 
   </div>

@@ -6,7 +6,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-update-employee',
   templateUrl: './update-employee.component.html',
-  styleUrls: ['./update-employee.component.css']
+  styleUrls: ['./update-employee.component.scss']
 })
 export class UpdateEmployeeComponent implements OnInit {
 
@@ -48,6 +48,12 @@ export class UpdateEmployeeComponent implements OnInit {
      this.id = val.success.id;
      console.log('gvh',val);
      console.log('gvh',this.image);
+    },
+    err=>{
+      console.log('dkd',err);
+          if(err.status=='401'){
+            this.router.navigate(['/auth/login']);
+          }
     });
   }
 
@@ -75,7 +81,13 @@ export class UpdateEmployeeComponent implements OnInit {
       console.log(data);
       alert(data.msg);
       this.router.navigate(['/profile']);
-    })
+    },
+    err=>{
+      console.log('dkd',err);
+          if(err.status=='401'){
+            this.router.navigate(['/auth/login']);
+          }
+    });
 
   }
 

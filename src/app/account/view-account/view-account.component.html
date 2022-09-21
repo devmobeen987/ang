@@ -1,0 +1,70 @@
+<!-- <p>view-account works!</p>
+<p class="menu_data" [routerLink]="['/account/edit',1]">Edit</p>
+<p class="menu_data" [routerLink]="['/account/add']">Add</p> -->
+<!-- <p>view-income works!</p>
+<a [routerLink]="['/income/add']" >Add+</a>
+<br>
+<a [routerLink]="['/income/edit',1]" >Edit</a> -->
+
+<div class="container justify-content-center mt-4">
+    <mat-card class="example-card">
+      <mat-card-header class="d-flex justify-content-between">
+        <mat-card-title>
+              <p>Account List</p>
+        </mat-card-title>
+        <div class="my-3">
+            <a [routerLink]="['/account/add']" >
+            <button mat-raised-button color="warn">Add+</button>
+            </a>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+          <table mat-table matSort [dataSource]="accountData"  class="mat-elevation-z8 w-100"   >
+            <ng-container matColumnDef="id" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+              <td mat-cell *matCellDef="let item"> {{item.id}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="account_no">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Account No</th>
+              <td mat-cell *matCellDef="let item">{{item.account_no}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ifsc_code">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>IFSC CODE</th>
+              <td mat-cell *matCellDef="let item">{{item.ifsc_code}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+              <td mat-cell *matCellDef="let item">{{item.type}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="account_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Account Name</th>
+                <td mat-cell *matCellDef="let item">{{item.account_name}}</td>
+            </ng-container> 
+
+            <ng-container matColumnDef="bank_name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Bank Name</th>
+                <td mat-cell *matCellDef="let item">{{item.bank_name}}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="Action">
+              <th mat-header-cell *matHeaderCellDef>Action</th>
+              <td mat-cell  *matCellDef="let item" >
+                <a [routerLink]="['/account/edit',item.id]">
+                  <button class="mx-2" mat-raised-button color="accent">Edit</button>
+                </a>
+                <button class="mx-2" mat-raised-button (click)="delete(item.id)" color="primary">Delete</button>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="headercolumn"></tr>
+            <tr mat-row *matRowDef="let row; columns:headercolumn"></tr>
+          </table>
+          <mat-paginator #Paginator length="3" [pageSizeOptions]="[3,5, 10, 20]" showFirstLastButtons >
+          </mat-paginator>
+      </mat-card-content>
+    </mat-card>           
+  </div>

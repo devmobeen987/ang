@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { AdminService } from 'src/app/service/admin.service';
@@ -9,7 +10,7 @@ import { totalemployee } from '../../model/employee.model';
 @Component({
   selector: 'app-company-dashboard',
   templateUrl: './company-dashboard.component.html',
-  styleUrls: ['./company-dashboard.component.css']
+  styleUrls: ['./company-dashboard.component.scss']
 })
 export class CompanyDashboardComponent implements OnInit {
   public employeeVal:any = {}
@@ -38,7 +39,7 @@ export class CompanyDashboardComponent implements OnInit {
   };
 
   public barChartType: ChartType = 'bar';
-  constructor(private api:AdminService) { }
+  constructor(private api:AdminService,public router:Router) { }
 
   ngOnInit(): void {
     let val= {}
@@ -51,7 +52,11 @@ export class CompanyDashboardComponent implements OnInit {
           }
         this.employeeVal = val;
         console.log('ddd',this.employeeVal);
-    });
+    },err=>{
+      if(err.status=='401'){
+        this.router.navigate(['/auth/login']);
+      }
+});
     this. onloadebarApi();
   }
 
@@ -73,7 +78,11 @@ export class CompanyDashboardComponent implements OnInit {
           ]
         };
         // console.log('sd',this.barChartData);
-    });
+      },err=>{
+        if(err.status=='401'){
+          this.router.navigate(['/auth/login']);
+        }
+      });
   }
 
 }

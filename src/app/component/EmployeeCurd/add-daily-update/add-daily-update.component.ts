@@ -5,7 +5,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-add-daily-update',
   templateUrl: './add-daily-update.component.html',
-  styleUrls: ['./add-daily-update.component.css']
+  styleUrls: ['./add-daily-update.component.scss']
 })
 export class AddDailyUpdateComponent implements OnInit {
 

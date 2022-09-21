@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -9,12 +9,16 @@ import { Observable, Subject } from 'rxjs';
 export class AdminService {
 
   url = "http://127.0.0.1:8000/api";
+  // url = "https://imaclowd.com/atendenceproject/api";
+  pipe: any;
   constructor(private http: HttpClient) { }
 
   username = new Subject<any>();
   totalemployee = new Subject<any>();
   token = new Subject<any>();
   role = new Subject<any>();
+
+  videoemit = new ReplaySubject<any>(5);
 
 
 
@@ -314,6 +318,144 @@ updateClient(id:any,req:any){
 /**client Api */
   
 
+/**project Api */
 
+viewClientlist(){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.get<any>(this.url+'/project/clientlist',httpOptions);
+}
+
+addProject(req:any){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.post(this.url+'/project/add',req,httpOptions);
+}
+
+viewProject(){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.get<any>(this.url+'/project',httpOptions);
+}
+
+viewsingalprojectlist(id:any){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.get<any>(this.url+'/project/singalproject/'+id,httpOptions);
+}
+
+updateproject(id:any,req:any){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.post(this.url+'/project/edit/'+id,req,httpOptions);
+}
+
+/**project Api */
+
+/**income Api */
+addIncome(req:any){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.post(this.url+'/income/add',req,httpOptions);
+}
+
+viewincome(){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.get<any>(this.url+'/income',httpOptions);
+}
+
+viewsingalincome(id:any){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.get<any>(this.url+'/income/singalincome/'+id,httpOptions);
+}
+
+viewsingalClientIncomeInfo(id:any){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.get<any>(this.url+'/income/singalClientIncome/'+id,httpOptions);
+}
+
+deleteClientIncome(id:any){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.post(this.url+'/income/delete/'+id,{},httpOptions);
+}
+
+updateClientApi(id:any,req:any){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.post(this.url+'/income/edit/'+id,req,httpOptions);
+}
+
+
+clientIncomeTotal(){
+  const token = localStorage.getItem('token');
+  const headers_object = new HttpHeaders({ 
+    'Authorization': "Bearer " + token
+  });
+  const httpOptions = {
+    headers: headers_object
+  }
+  return this.http.get<any>(this.url+'/income/totaldashbord/',httpOptions);
+}
+
+/**income Api */
 
 }

@@ -1,66 +1,69 @@
 
-      <mat-toolbar color="primary" *ngIf="token">
-            <button mat-mini-fab  color="worn" (click)="opened=!opened" aria-label="Example icon button with a menu icon">
-              <mat-icon>menu</mat-icon>
-            </button>
-              <h3 class="mx-3" [routerLink]="['/profile']">ATTENDENCE</h3>
-            
-            <div class="d-flex">
-              <a class="nav-link" *ngIf="role=='company'" [routerLink]="['compnaydashbord']">Dashbord</a>
-              <a class="nav-link" [routerLink]="['/profile']">Profile</a>
-              <a class="nav-link" *ngIf="role=='company'" [routerLink]="['/register']">Register</a>
-              <a class="nav-link" *ngIf="role=='employee'" [routerLink]="['employee/dashbord']">Dashbord</a>
-              <a class="nav-link" *ngIf="role=='employee'" [routerLink]="['employee/addupdate']">Daily Update</a>
-              <a class="nav-link" *ngIf="role=='company'">TotalEmployee : {{employee}} </a>
-            </div>
-            <div>
-              <div >
-                <button class="btn btn-danger" *ngIf="role=='employee'">
-                  <a class="link"  [routerLink]="['/leave/addleave']">Add Leave</a>
-                </button>
-              </div>
-             
-            </div>
-            <span class="example-spacer"></span>
-          <div class="aling">
-            <div class="d-flex">
-              <a class="nav-link"*ngIf="!token" [routerLink]="['/auth/login']">Login</a>
-              <a class="nav-link" *ngIf="token" (click)="logout()">Logout</a>
-              <a class="nav-link color">{{username}}</a>
-            </div>
-          </div>
-      </mat-toolbar>
-    
-    <mat-sidenav-container class="example-container">
-      <mat-sidenav mode="side" [(opened)]="opened"> 
-        <p class="nav-link color" >{{username}}</p>
-        <div class="d-block">
-          <a class="nav-link" *ngIf="role=='company'" [routerLink]="['/employee/viewemployee']">EmployeeList </a>
-          <a class="nav-link" *ngIf="role=='company'" [routerLink]="['/leave/empleavelist']">Leaves List</a>
-          <a class="nav-link" *ngIf="role=='employee'" [routerLink]="['/leave/listleave']" >List Leaves</a>
-          <a class="nav-link" *ngIf="role=='company'"  [routerLink]="['/company']" >View Daily Update</a>
-          <a class="nav-link" *ngIf="role=='employee'" [routerLink]="['/employee']" >View Daily Update</a>
-          <a class="nav-link" *ngIf="!token" [routerLink]="['/auth/login']">Login</a>
-          <a class="nav-link" *ngIf="token" (click)="logout()">Logout</a>
+<mat-toolbar color="primary" *ngIf="isLogin">
+      <button mat-mini-fab  color="worn" (click)="opened=!opened" >
+        <mat-icon>menu</mat-icon>
+      </button>
+        <h3 class="mx-3" [routerLink]="['/profile']">ATTENDENCE</h3>
+      
+      <div class="d-flex">
+        <a class="nav-link" *ngIf="role=='company'" [routerLink]="['compnaydashbord']">Dashbord</a>
+        <a class="nav-link" [routerLink]="['/profile']">Profile</a>
+        <!-- <a class="nav-link" *ngIf="role=='company'" [routerLink]="['/register']">Register</a> -->
+        <a class="nav-link" *ngIf="role=='employee'" [routerLink]="['employee/dashbord']">Dashbord</a>
+        <a class="nav-link" *ngIf="role=='employee'" [routerLink]="['employee/addupdate']">Daily Update</a>
+        <a class="nav-link" *ngIf="role=='company'">TotalEmployee : {{employee}} </a>
+      </div>
+      <div>
+        <div >
+          <button class="btn btn-danger" *ngIf="role=='employee'">
+            <a class="link"  [routerLink]="['/leave/addleave']">Add Leave</a>
+          </button>
         </div>
+        
+      </div>
+      <span class="example-spacer"></span>
+    <div class="aling">
+      <div class="d-flex">
+        <a class="nav-link"*ngIf="!isLogin" [routerLink]="['/auth/login']">Login</a>
+        <a class="nav-link" *ngIf="isLogin" (click)="logout()">Logout</a>
+        <a class="nav-link color">{{username}}</a>
+      </div>
+    </div>
+</mat-toolbar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" [(opened)]="opened" *ngIf="isLogin"> 
+    <p class="nav-link color" >{{username}}</p>
+    <div class="d-block">
+      <a class="nav-link" *ngIf="role=='company'" [routerLink]="['/employee/viewemployee']">EmployeeList </a>
+      <a class="nav-link" *ngIf="role=='company'" [routerLink]="['/leave/empleavelist']">Leaves List</a>
+      <a class="nav-link" *ngIf="role=='employee'" [routerLink]="['/leave/listleave']" >List Leaves</a>
+      <a class="nav-link" *ngIf="role=='company'"  [routerLink]="['/company']" >View Daily Update</a>
+      <a class="nav-link" *ngIf="role=='employee'" [routerLink]="['/employee']" >View Daily Update</a>
+      <a class="nav-link" *ngIf="!isLogin" [routerLink]="['/auth/login']">Login</a>
+      <a class="nav-link" *ngIf="isLogin" (click)="logout()">Logout</a>
+    </div>
 
-         <div *ngIf="role=='company'">
-            <mat-expansion-panel hideToggle class="bg-color">
-              <mat-expansion-panel-header>
-                <p>Finance Menu</p>
-              </mat-expansion-panel-header>
-                <p class="menu_data" [routerLink]="['client/add']">Add Client</p>
-                <p class="menu_data" [routerLink]="['client/list']">View Client</p>
-                <p class="menu_data">Project</p>
-                <p class="menu_data">Income </p>
-                <p class="menu_data">Expanse</p>
-            </mat-expansion-panel>
-         </div>
-           
-      </mat-sidenav>
-      <mat-sidenav-content>
-        <router-outlet (activate)="getName()" ></router-outlet>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
+      <div *ngIf="role=='company'">
+        <mat-expansion-panel hideToggle class="bg-color">
+          <mat-expansion-panel-header>
+            <p>Finance Menu</p>
+          </mat-expansion-panel-header>
+            <p class="menu_data" [routerLink]="['/client/add']">Add Client</p>
+            <p class="menu_data" [routerLink]="['/client/list']">View Client</p>
+            <p class="menu_data" [routerLink]="['/project/list']">Project</p>
+            <p class="menu_data" [routerLink]="['/income/list']">Income</p>
+            <p class="menu_data" [routerLink]="['/expanse/list']">Expanse</p>
+            <p class="menu_data" [routerLink]="['/incomedashbord']">Income Dashbord</p>
+            <p class="menu_data" [routerLink]="['/account/list']">Account List</p>
+            <p class="menu_data" [routerLink]="['/account/list']">Employee salary</p>
+        </mat-expansion-panel>
+      </div>
+        
+  </mat-sidenav>
+  <mat-sidenav-content>
+     <router-outlet (activate)="getName()" ></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
 
   

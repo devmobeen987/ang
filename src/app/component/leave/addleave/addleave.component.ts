@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-addleave',
   templateUrl: './addleave.component.html',
-  styleUrls: ['./addleave.component.css']
+  styleUrls: ['./addleave.component.scss']
 })
 export class AddleaveComponent implements OnInit {
 
@@ -17,7 +18,7 @@ export class AddleaveComponent implements OnInit {
 
   })
 
-  constructor( private fb:FormBuilder, private api:AdminService) { }
+  constructor( private fb:FormBuilder, private api:AdminService, private router:Router) { }
 
   ngOnInit(): void {
     
@@ -43,6 +44,11 @@ export class AddleaveComponent implements OnInit {
       }
      
       console.log(data.success);
+    },err=>{
+      console.log('dkd',err);
+          if(err.status=='401'){
+            this.router.navigate(['/auth/login']);
+          }
     });
     
 

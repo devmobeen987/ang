@@ -6,7 +6,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
-  styleUrls: ['./add-employee.component.css']
+  styleUrls: ['./add-employee.component.scss']
 })
 export class AddEmployeeComponent implements OnInit {
 
@@ -17,6 +17,7 @@ export class AddEmployeeComponent implements OnInit {
     username:[''],
     address:[''],
     experience:[''],
+    joining_date:[''],
     employeetype:[''],
     status:[''],
     password:[''],
@@ -43,6 +44,7 @@ export class AddEmployeeComponent implements OnInit {
     paylode.append("username",this.add_employee_form.value.username);
     paylode.append("address",this.add_employee_form.value.address);
     paylode.append("experience",this.add_employee_form.value.experience);
+    paylode.append("joining_date",this.add_employee_form.value.joining_date);
     paylode.append("employeetype",this.add_employee_form.value.employeetype);
     paylode.append("status",this.add_employee_form.value.status);
     paylode.append("password",this.add_employee_form.value.password);
@@ -53,6 +55,12 @@ export class AddEmployeeComponent implements OnInit {
       this.apiservice.gettotalempcount().subscribe((data:any)=>{
           this.apiservice.totalemployee.next(data.employee);
           this.router.navigate(['/employee/viewemployee']); 
+       },
+       err=>{
+          console.log('dkd',err);
+          if(err.status=='401'){
+            this.router.navigate(['/auth/login']);
+          }
        });
     });
     

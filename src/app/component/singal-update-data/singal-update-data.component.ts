@@ -5,7 +5,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-singal-update-data',
   templateUrl: './singal-update-data.component.html',
-  styleUrls: ['./singal-update-data.component.css']
+  styleUrls: ['./singal-update-data.component.scss']
 })
 export class SingalUpdateDataComponent implements OnInit {
 
@@ -23,7 +23,12 @@ export class SingalUpdateDataComponent implements OnInit {
      this.api.singalupdate(this.id).subscribe((data:any)=>{
            console.log(data);
            this.employeeData = data[0];
-     });
+     },err=>{
+      console.log('dkd',err);
+          if(err.status=='401'){
+            this.router.navigate(['/auth/login']);
+          }
+    });
 
   }
 

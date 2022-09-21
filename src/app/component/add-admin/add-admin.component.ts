@@ -6,7 +6,7 @@ import { AdminService } from 'src/app/service/admin.service';
 @Component({
   selector: 'app-add-admin',
   templateUrl: './add-admin.component.html',
-  styleUrls: ['./add-admin.component.css']
+  styleUrls: ['./add-admin.component.scss']
 })
 export class AddAdminComponent implements OnInit {
 
@@ -34,6 +34,10 @@ export class AddAdminComponent implements OnInit {
          alert(' added successfully');
          this.router.navigate(['/profile']);
          console.log(data);
+    },err=>{
+      if(err.status=='401'){
+        this.router.navigate(['/auth/login']);
+      }
     });
   }
 }

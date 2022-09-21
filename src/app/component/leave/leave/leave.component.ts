@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-leave',
   templateUrl: './leave.component.html',
-  styleUrls: ['./leave.component.css']
+  styleUrls: ['./leave.component.scss']
 })
 export class LeaveComponent implements OnInit {
 public displayedColumns: string[] = [
@@ -20,7 +21,7 @@ public displayedColumns: string[] = [
   @ViewChild('Paginator') paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 public employeeLeavedata: any = new MatTableDataSource<any[]>([]);
-  constructor(private api:AdminService,) { }
+  constructor(private api:AdminService,public router:Router) { }
   
   ngOnInit(): void {
     this.onloadeApi();
@@ -39,7 +40,12 @@ onloadeApi()
     this.employeeLeavedata.paginator = this.paginator;
     this.employeeLeavedata.sort = this.sort;
       console.log(this.employeeLeavedata);
- })  
+ },err=>{
+  console.log('dkd',err);
+      if(err.status=='401'){
+        this.router.navigate(['/auth/login']);
+      }
+});  
 
 }
 

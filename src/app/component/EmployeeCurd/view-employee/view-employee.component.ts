@@ -9,7 +9,7 @@ import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-view-employee',
   templateUrl: './view-employee.component.html',
-  styleUrls: ['./view-employee.component.css']
+  styleUrls: ['./view-employee.component.scss']
 })
 
 export class ViewEmployeeComponent implements OnInit {
@@ -32,6 +32,7 @@ export class ViewEmployeeComponent implements OnInit {
     'Action'];
   constructor(private api: AdminService,
     public dialog: MatDialog,
+    public router:Router
   ) { }
   @ViewChild('Paginator') paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -51,6 +52,12 @@ export class ViewEmployeeComponent implements OnInit {
       this.emploayeesentrydata.paginator = this.paginator;
       this.emploayeesentrydata.sort = this.sort;
       console.log(this.emploayeesentrydata);
+    },
+    err=>{
+      console.log('dkd',err);
+          if(err.status=='401'){
+            this.router.navigate(['/auth/login']);
+          }
     });
   }
 
@@ -66,6 +73,12 @@ export class ViewEmployeeComponent implements OnInit {
         this.api.deleteEmployee(id).subscribe((data: any) => {
           console.log(data);
           this.onloadeApi();
+        },
+        err=>{
+          console.log('dkd',err);
+              if(err.status=='401'){
+                this.router.navigate(['/auth/login']);
+              }
         })
       }
     });
