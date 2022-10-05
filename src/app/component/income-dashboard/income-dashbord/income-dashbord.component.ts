@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js'; 
 import { BaseChartDirective } from 'ng2-charts';
@@ -13,6 +14,7 @@ import { ExpanseService } from 'src/app/service/expanse.service';
 })
 export class IncomeDashbordComponent implements OnInit {
  public url = "http://127.0.0.1:8000/api";
+ //public url = "https://imaclowd.com/atendenceproject/api";
 
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   public lineChartData: ChartConfiguration['data'] = {
@@ -54,30 +56,41 @@ export class IncomeDashbordComponent implements OnInit {
   };
 
   public lineChartType: ChartType = 'line';
-
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  durationInSeconds = 2;
   // end
   private ngUnsubscribe = new Subject<void>();
 
-  constructor(private api:ExpanseService, private servies:AdminService,private http: HttpClient,public router:Router) { }
+  constructor(private api:ExpanseService,
+     private servies:AdminService,
+     private http: HttpClient,
+     public router:Router,
+     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
    this.loadeapi();
-  //  this.loadeincum();
   }
 
   loadeapi(){
       let datasets1:any[] = [];
       const token = localStorage.getItem('token');
+      // console.log('sks/////////',token);
       const headers_object = new HttpHeaders({ 
           'Authorization': "Bearer " + token
       });
       const httpOptions = {
         headers: headers_object
       }
+      const parllelApi = [];
       const data1 = this.http.get<any>(this.url+'/expanse/totalexpansedashbord',httpOptions);
       const data2 = this.http.get<any>(this.url+'/income/totaldashbord',httpOptions);
       let monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"];  
-      forkJoin([data1, data2]).subscribe((req:any) => {
+      parllelApi.push(data1);
+      parllelApi.push(data2);
+      console.log('jjj',parllelApi);
+      // return;
+      forkJoin(parllelApi).subscribe((req:any) => {
           console.log('jk',req);
           const res = req[0].data
           const res2 = req[1].data
@@ -92,21 +105,9 @@ export class IncomeDashbordComponent implements OnInit {
             data:this.expanseAmount,
             label:'Expanse'
           });
-
-          // let amountset:any = {
-          //   data:this.expanseAmount,
-          //   label:'Expanse'
-          // };
-          // this.lineChartData ={
-          //   datasets: [amountset],
-          //   labels: this.fullMonthName
-          // };
-
-
           let fullMonthName:any = [];
           let incometotal:any = [];
           res2.forEach((e:any) => {
-            // console.log(e.date);
             let d:any = new Date(e.date);
             fullMonthName.push( monthNames[d.getMonth()]);
             incometotal.push(e.amount);
@@ -121,10 +122,20 @@ export class IncomeDashbordComponent implements OnInit {
         // this.lineChartData.labels = fullMonthName; 
         console.log('iji',this.lineChartData);
       },
-      err=>{
+      (err)=>{
         console.log('dkd',err);
             if(err.status=='401'){
               this.router.navigate(['/auth/login']);
+            }
+            if(err.status=='400'){
+              this._snackBar.open('somthing is wrong','',
+              {
+                duration: this.durationInSeconds * 1000,
+                horizontalPosition: this.horizontalPosition,
+                verticalPosition: this.verticalPosition,
+              });
+              setTimeout(() => {
+              }, 2000);
             }
       });
 

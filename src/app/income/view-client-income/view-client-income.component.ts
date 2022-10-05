@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { clientlistApireq } from 'src/app/model/client.model';
+import { clientIncomeModel, ClientIncomesingallistModel, viewClientlistModel } from '../../model/client.model';
 import { incomesingallistApi, incomesingallistApisecond } from 'src/app/model/income.model';
 import { Clientlist } from 'src/app/model/project.model';
 import { AdminService } from 'src/app/service/admin.service';
@@ -16,7 +16,7 @@ export class ViewClientIncomeComponent implements OnInit {
   private ngUnsubscribe = new Subject<void>();
   public id:number = 0;
   public clientName:Clientlist[] = [];
-  public listClientData:any = [];
+  public listClientData:any[] = [];
   constructor(
     public api:AdminService,
     public router: Router,
@@ -45,9 +45,9 @@ export class ViewClientIncomeComponent implements OnInit {
   // }
 
   loadesingalclientapi(){
-    this.api.viewsingalClientIncomeInfo(this.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((res:any)=>{
-      // console.log('nnnn[[[[[[',res.data);
-      res.data.forEach((e:any) => {
+    this.api.viewsingalClientIncomeInfo(this.id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((res:clientIncomeModel)=>{
+      console.log('nnnn[[[[[[//',res);
+      res.data.forEach((e:ClientIncomesingallistModel) => {
         //  console.log('djjj',e);
         let tds = '';
         if(e.tds!=null){

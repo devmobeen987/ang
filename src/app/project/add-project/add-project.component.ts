@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 // import { Clientlist } from 'src/app/model/client.model';
 import { AdminService } from 'src/app/service/admin.service';
@@ -21,7 +22,13 @@ export class AddProjectComponent implements OnInit {
     status:[''],
   });
   public clientName:Clientlist[] = [];
-  constructor(private fb:FormBuilder, public api:AdminService, public router: Router) { }
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  durationInSeconds = 2;
+  constructor(private fb:FormBuilder,
+     public api:AdminService,
+      public router: Router,
+      private _snackBar: MatSnackBar,) { }
 
   ngOnInit(): void {
     this.loadeApi();
@@ -56,7 +63,17 @@ export class AddProjectComponent implements OnInit {
     console.log(paylode);
     // return
     this.api.addProject(paylode).subscribe((data:any)=>{
-      alert(data.msg);
+      // alert(data.msg);
+      this._snackBar.open(data.msg,'',
+      {
+        duration: this.durationInSeconds * 1000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+      setTimeout(() => {
+        this.router.navigate(['/contractor']);
+      }, 2000);
+
     },err=>{
           if(err.status=='401'){
             this.router.navigate(['/auth/login']);

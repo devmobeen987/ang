@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -15,7 +16,17 @@ export class AddDailyUpdateComponent implements OnInit {
     date:[''],
     update:[''],
   });
-  constructor(private fb:FormBuilder, private api:AdminService) { }
+   // snack bar start
+   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+   verticalPosition: MatSnackBarVerticalPosition = 'top';
+   durationInSeconds = 2;
+   //end
+  constructor(
+    private fb:FormBuilder, 
+    private api:AdminService,
+    private _snackBar: MatSnackBar
+
+    ) { }
 
   ngOnInit(): void {
   }
@@ -37,7 +48,17 @@ export class AddDailyUpdateComponent implements OnInit {
     console.log(paylode);
     this.api.EmployeeDailyupdate(paylode).subscribe((data:any)=>{
         console.log(data);
-        alert(data.success);
+        // alert(data.success);
+        this._snackBar.open(data.success,'',
+        {
+          duration: this.durationInSeconds * 1000,
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+        setTimeout(() => {
+        }, 2000);
+
+        
     });
 
   }

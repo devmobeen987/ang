@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -21,10 +22,19 @@ export class AdminEditComponent implements OnInit {
 
   public id:any;
   public valid:boolean = false;
+
+  // snack bar start
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  durationInSeconds = 2;
+  //end
+  
   constructor(private fb:FormBuilder,
      public apiservice:AdminService, 
      public router: Router,
-     public route:ActivatedRoute) { }
+     public route:ActivatedRoute,
+     private _snackBar: MatSnackBar
+     ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -68,8 +78,17 @@ export class AdminEditComponent implements OnInit {
        };
        this.apiservice.updateUserdata(this.id,sendingdata).subscribe((data:{})=>{
          console.log(data);
-         alert('Data Is Updated');
-         this.router.navigate(['/profile']);
+         this._snackBar.open('Data Is Updated successfully','',
+         {
+           duration: this.durationInSeconds * 1000,
+           horizontalPosition: this.horizontalPosition,
+           verticalPosition: this.verticalPosition,
+         });
+         setTimeout(() => {
+          this.router.navigate(['/profile']);
+         }, 2000);
+        //  alert('Data Is Updated');
+        //  this.router.navigate(['/profile']);
     
        },
        err=>{

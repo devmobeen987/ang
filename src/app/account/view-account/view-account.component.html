@@ -63,7 +63,7 @@
             <tr mat-header-row *matHeaderRowDef="headercolumn"></tr>
             <tr mat-row *matRowDef="let row; columns:headercolumn"></tr>
           </table>
-          <mat-paginator #Paginator length="3" [pageSizeOptions]="[3,5, 10, 20]" showFirstLastButtons >
+          <mat-paginator #Paginator length="5" [pageSizeOptions]="[3,5, 10, 20]" showFirstLastButtons >
           </mat-paginator>
       </mat-card-content>
     </mat-card>           

@@ -18,6 +18,7 @@ export class LoginAdminComponent implements OnInit {
   constructor(private fb:FormBuilder, private apiservice:AdminService, public router: Router) { }
 
   ngOnInit(): void {
+    localStorage.setItem('token','');
   }
 
   login(){

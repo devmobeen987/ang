@@ -13,6 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { NgChartsModule } from 'ng2-charts';
 import { IncomeDashbordComponent } from './income-dashbord/income-dashbord.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { IncomeDashbordComponent } from './income-dashbord/income-dashbord.compo
     ReactiveFormsModule,
     MatInputModule,
     NgChartsModule,
+    MatSnackBarModule,
   ]
 })
 export class IncomeDashboardModule { }

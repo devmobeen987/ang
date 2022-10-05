@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -16,9 +17,17 @@ export class AddleaveComponent implements OnInit {
       toDate:[''],
       reason:[''],
 
-  })
+  });
+  // snack bar start
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  durationInSeconds = 2;
+  //end
 
-  constructor( private fb:FormBuilder, private api:AdminService, private router:Router) { }
+  constructor( private fb:FormBuilder,
+     private api:AdminService,
+     private router:Router,
+     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     
@@ -40,7 +49,15 @@ export class AddleaveComponent implements OnInit {
     }
     this.api.addLeaves(paylode).subscribe((data:any)=>{
       if(data.success){
-        alert("Add Leave Data ");
+        this._snackBar.open("Add Leave Data Successfully ",'',
+        {
+          duration: this.durationInSeconds * 1000,
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+        setTimeout(() => {
+        }, 2000);
+        // alert("Add Leave Data ");
       }
      
       console.log(data.success);

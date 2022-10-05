@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -28,7 +29,16 @@ export class EditEmployeeComponent implements OnInit {
   public selectedFile:any = null;
   public id:any = '';
   public is_notice = 'no';
-  constructor(private fb:FormBuilder, private api:AdminService, private route:ActivatedRoute, private router:Router) { }
+  // snack bar start
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  durationInSeconds = 2;
+  //end
+  constructor(private fb:FormBuilder,
+     private api:AdminService,
+     private route:ActivatedRoute,
+     private router:Router,
+     private _snackBar: MatSnackBar) { }
    
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -87,7 +97,16 @@ export class EditEmployeeComponent implements OnInit {
     paylode.append("is_notice",this.is_notice);
     this.api.UpdateEmployee(this.id,paylode).subscribe((data:any)=>{
       console.log(data);
-      alert(data.msg);
+      // alert(data.msg);
+      this._snackBar.open(data.msg,'',
+      {
+        duration: this.durationInSeconds * 1000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+      setTimeout(() => {
+      }, 2000);
+
       this.router.navigate(['/employee/viewemployee']);
     },
     err=>{

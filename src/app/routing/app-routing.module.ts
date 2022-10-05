@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'income', loadChildren: () => import('../income/income.module').then(m =>m.IncomeModule)},
   { path: 'expanse', loadChildren: () => import('../expanse/expanse.module').then(m =>m.ExpanseModule)},
   { path: 'account', loadChildren: () => import('../account/account.module').then(m =>m.AccountModule)},
+  { path: 'contractor', loadChildren: () => import('../contractors/contractors.module').then(m =>m.ContractorsModule)},
   { path: 'incomedashbord', loadChildren: () => import('../component/income-dashboard/income-dashboard.module').then(m =>m.IncomeDashboardModule)},
 ];
 

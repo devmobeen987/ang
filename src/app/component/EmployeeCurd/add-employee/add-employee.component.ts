@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -24,7 +25,13 @@ export class AddEmployeeComponent implements OnInit {
     confirmpassword:[''],
   })
   selectedFile:any = null;
-  constructor(private fb:FormBuilder, public apiservice:AdminService, public router: Router) { }
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  durationInSeconds = 2;
+  constructor(private fb:FormBuilder,
+     public apiservice:AdminService,
+      public router: Router,
+      private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -51,7 +58,14 @@ export class AddEmployeeComponent implements OnInit {
     paylode.append("confirmpassword",this.add_employee_form.value.confirmpassword);
     this.apiservice.addemployee(paylode).subscribe((data:any)=>{
       console.log('mkm',data);
-      alert(data.success);
+      this._snackBar.open(data.success,'',
+        {
+          duration: this.durationInSeconds * 1000,
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+        setTimeout(() => {
+        }, 2000);
       this.apiservice.gettotalempcount().subscribe((data:any)=>{
           this.apiservice.totalemployee.next(data.employee);
           this.router.navigate(['/employee/viewemployee']); 

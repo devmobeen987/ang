@@ -54,24 +54,24 @@ export class AppComponent {
   }
  
 
-  getName(){
-    if (this.router.url.includes("profile")){
-      if(this.role=='company'){
-          this.api.gettotalempcount().subscribe((data:any)=>{
-            this.api.totalemployee.next(data.employee);
-          },
-          err=>{
-            console.log('dkd',err);
-            if(err.status=='401'){
-              this.router.navigate(['/auth/login']);
-            }
-          });
-      }
-    } else {
-      console.log('djdj');
-    }
+  // getName(){
+  //   if (this.router.url.includes("profile")){
+  //     if(this.role=='company'){
+  //         this.api.gettotalempcount().subscribe((data:any)=>{
+  //           this.api.totalemployee.next(data.employee);
+  //         },
+  //         err=>{
+  //           console.log('dkd',err);
+  //           if(err.status=='401'){
+  //             this.router.navigate(['/auth/login']);
+  //           }
+  //         });
+  //     }
+  //   } else {
+  //     console.log('djdj');
+  //   }
   
-  }
+  // }
 
   opendropdown(){
     this.showdropdown=true;

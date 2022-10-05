@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
@@ -28,7 +29,15 @@ export class UpdateEmployeeComponent implements OnInit {
   public id:any = '';
   public showdate:boolean = false;
   public is_notice:any = 'no';
-  constructor(private fb:FormBuilder, private api:AdminService, private route:ActivatedRoute, private router:Router) { }
+  // snack bar start
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  durationInSeconds = 2;
+  //end
+  constructor(private fb:FormBuilder,
+     private api:AdminService,
+     private router:Router,
+     private _snackBar: MatSnackBar) { }
    
   ngOnInit(): void {
     this.api.getEmployee().subscribe((val:any)=>{
@@ -80,6 +89,15 @@ export class UpdateEmployeeComponent implements OnInit {
     this.api.UpdateEmployee(this.id,paylode).subscribe((data:any)=>{
       console.log(data);
       alert(data.msg);
+      this._snackBar.open(data.msg,'',
+        {
+          duration: this.durationInSeconds * 1000,
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
+        setTimeout(() => {
+        }, 2000);
+
       this.router.navigate(['/profile']);
     },
     err=>{
