@@ -9,12 +9,12 @@ import { AddContractorApi } from '../model/contractor.model';
   providedIn: 'root'
 })
 export class ContractorService {
-  url = "http://127.0.0.1:8000/api";
-//   url = "https://imaclowd.com/atendenceproject/api";
+  // url = "http://127.0.0.1:8000/api";
+  url = "https://imaclowd.com/atendenceproject/api";
   pipe: any;
   constructor(private http: HttpClient) { }
 
-
+  
   viewContractor(){
     const token = localStorage.getItem('token');
     const headers_object = new HttpHeaders({ 
@@ -23,7 +23,9 @@ export class ContractorService {
     const httpOptions = {
       headers: headers_object
     }
-    return this.http.get<any>(this.url+'/contractor',httpOptions);
+    return this.http.get<any>(this.url+'/contractor',httpOptions).pipe(
+      catchError(this.handleError)
+      );
   }
 
   addContractor(req:any){
@@ -34,7 +36,7 @@ export class ContractorService {
     const httpOptions = {
       headers: headers_object
     }
-    return this.http.post(this.url+'/contractor/add/',req,httpOptions);
+    return this.http.post<AddContractorApi>(this.url+'/contractor/add/',req,httpOptions);
   }
 
   singalContractor(id:any){
@@ -48,7 +50,7 @@ export class ContractorService {
     return this.http.get<any>(this.url+'/contractor/singalContractor/'+id,httpOptions);
   }
 
-  updateContractor(req:any,id:any){
+  updateContractor(req:any,id:any):Observable<AddContractorApi>{
     const token = localStorage.getItem('token');
     const headers_object = new HttpHeaders({ 
       'Authorization': "Bearer " + token
@@ -56,28 +58,29 @@ export class ContractorService {
     const httpOptions = {
       headers: headers_object
     }
-    return this.http.post<AddContractorApi>(this.url+'/contractor/edit/'+id,req,httpOptions) .pipe(
+    return this.http.post<AddContractorApi>(this.url+'/contractor/edit/'+id,req,httpOptions).pipe(
       catchError(this.handleError)
-      );;
+      );
   }
+ 
+  deleteContractor(id:any):Observable<AddContractorApi>{
+    const token = localStorage.getItem('token');
+    const headers_object = new HttpHeaders({ 
+      'Authorization': "Bearer " + token
+    });
+    const httpOptions = {
+      headers: headers_object
+    }
+    return this.http.post<AddContractorApi>(this.url+'/contractor/delete/'+id,{},httpOptions);
+  }
+
   handleError(error: HttpErrorResponse){
     let errorMessage = '';
-    
-    console.log('jjj',error);
+     console.log('mm',error.status);
+    console.log(errorMessage);
     return throwError(() => {
         return errorMessage;
     });
-  }
- 
-  deleteContractor(id:any):Observable<ApiResponseMsg>{
-    const token = localStorage.getItem('token');
-    const headers_object = new HttpHeaders({ 
-      'Authorization': "Bearer " + token
-    });
-    const httpOptions = {
-      headers: headers_object
-    }
-    return this.http.post<ApiResponseMsg>(this.url+'/contractor/delete/'+id,{},httpOptions);
   }
 
   

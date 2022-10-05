@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AddContractorApi } from 'src/app/model/contractor.model';
 import { ContractorService } from 'src/app/service/contractor.service';
+import { SnackBarService } from 'src/app/service/snackBar.service';
 
 @Component({
   selector: 'app-add-contractors',
@@ -21,14 +22,12 @@ export class AddContractorsComponent implements OnInit {
     address:[''],
     status:[''],
   });
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-  durationInSeconds = 2;
+
   private ngUnsubscribe = new Subject<void>();
   constructor(public fb:FormBuilder,
     private api:ContractorService, 
     public router: Router,
-    private _snackBar: MatSnackBar,
+    private _snackBar: SnackBarService,
     public route:ActivatedRoute) { }
     
   ngOnInit(): void {
@@ -49,23 +48,20 @@ export class AddContractorsComponent implements OnInit {
     }
     // console.log('dddd',date);
     console.log('jfjjf',paylode);
-    this.api.addContractor(paylode).pipe(takeUntil(this.ngUnsubscribe)).subscribe((e:any)=>{
+    this.api.addContractor(paylode).pipe(takeUntil(this.ngUnsubscribe)).subscribe((e:AddContractorApi)=>{
      console.log(e);
-     this._snackBar.open(e.msg,'',
-      {
-        duration: this.durationInSeconds * 1000,
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
+     this._snackBar.toster(e.msg);
       setTimeout(() => {
         this.router.navigate(['/contractor/view']);
-      }, 2000);
-    },
-    err=>{
-      if(err.status=='401'){
-        this.router.navigate(['/auth/login']);
-      }
-    })
+       }, 2000);
+    //  this._snackBar.open(e.msg,'',
+    //   {
+    //     duration: this.durationInSeconds * 1000,
+    //     horizontalPosition: this.horizontalPosition,
+    //     verticalPosition: this.verticalPosition,
+    //   });
+     
+    });
 
   }
 }

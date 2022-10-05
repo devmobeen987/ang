@@ -30,7 +30,7 @@ export class AppComponent {
     this.role = localStorage.getItem('role');
     
     if(this.isLogin){
-     this.router.navigate(['profile']);
+     //this.router.navigate(['profile']);
     }else{
       this.router.navigate(['auth/login']);
     }

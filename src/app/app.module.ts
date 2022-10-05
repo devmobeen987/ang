@@ -30,6 +30,7 @@ import { SingalUpdateDataModule } from './component/singal-update-data/singal-up
 import { CompanyDashboardModule } from './component/company-dashboard/company-dashboard.module';
 import { NgChartsModule } from 'ng2-charts';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { IncomeDashbordComponent } from './component/income-dashbord/income-dashbord.component';
 
 // import { AddEmployeeModule } from './component/EmployeeCurd/add-employee/add-employee.module';
@@ -84,7 +85,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ViewUpdateListModule,
     SingalUpdateDataModule,
     CompanyDashboardModule,
-    NgChartsModule
+    NgChartsModule,
+    MatSnackBarModule
     // LeaveModule,
     // AddleaveModule,
     // ListLeaveModule,

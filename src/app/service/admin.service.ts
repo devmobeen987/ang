@@ -8,8 +8,8 @@ import { Observable, ReplaySubject, Subject } from 'rxjs';
 })
 export class AdminService {
 
-  url = "http://127.0.0.1:8000/api";
-  // url = "https://imaclowd.com/atendenceproject/api";
+  // url = "http://127.0.0.1:8000/api";
+  url = "https://imaclowd.com/atendenceproject/api";
   pipe: any;
   constructor(private http: HttpClient) { }
 

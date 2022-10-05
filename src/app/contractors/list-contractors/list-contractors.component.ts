@@ -9,6 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { DeleteEmployeeComponent } from 'src/app/component/EmployeeCurd/delete-employee/delete-employee.component';
 import { AddContractorApi, reaponsContractorApi, reqContractorApi } from 'src/app/model/contractor.model';
 import { ContractorService } from 'src/app/service/contractor.service';
+import { SnackBarService } from 'src/app/service/snackBar.service';
 // import { ExpanseService } from 'src/app/service/expanse.service';
 
 @Component({
@@ -41,7 +42,7 @@ export class ListContractorsComponent implements OnInit {
     public router:Router,
     private Api:ContractorService,
     public dialog: MatDialog,
-    private _snackBar: MatSnackBar,) { }
+    private _snackBar: SnackBarService,) { }
 
   ngOnInit(): void {
     this.viewContractDetail();
@@ -64,18 +65,8 @@ export class ListContractorsComponent implements OnInit {
         console.log('yeskk');
         this.Api.deleteContractor(id).pipe(takeUntil(this.ngUnsubscribe)).subscribe((data:AddContractorApi) => {
           console.log(data);
-          this._snackBar.open(data.msg,'',
-           {
-             duration: this.durationInSeconds * 1000,
-             horizontalPosition: this.horizontalPosition,
-             verticalPosition: this.verticalPosition,
-           });
-
+          this._snackBar.toster(data.msg);
           this.viewContractDetail();
-         },err=>{
-           if(err.status=='401'){
-             this.router.navigate(['/auth/login']);
-           }
          });
       }
     });

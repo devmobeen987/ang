@@ -33,7 +33,7 @@ export class AdminEditComponent implements OnInit {
      public apiservice:AdminService, 
      public router: Router,
      public route:ActivatedRoute,
-     private _snackBar: MatSnackBar
+    //  private _snackBar: MatSnackBar
      ) { }
 
   ngOnInit(): void {
@@ -78,12 +78,12 @@ export class AdminEditComponent implements OnInit {
        };
        this.apiservice.updateUserdata(this.id,sendingdata).subscribe((data:{})=>{
          console.log(data);
-         this._snackBar.open('Data Is Updated successfully','',
-         {
-           duration: this.durationInSeconds * 1000,
-           horizontalPosition: this.horizontalPosition,
-           verticalPosition: this.verticalPosition,
-         });
+        //  this._snackBar.open('Data Is Updated successfully','',
+        //  {
+        //    duration: this.durationInSeconds * 1000,
+        //    horizontalPosition: this.horizontalPosition,
+        //    verticalPosition: this.verticalPosition,
+        //  });
          setTimeout(() => {
           this.router.navigate(['/profile']);
          }, 2000);
