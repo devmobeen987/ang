@@ -29,8 +29,8 @@
                                 </mat-form-field>
                            </div>
                        </div>
-                       <div class="row">
-                            <div class="col-md-6 offset-md-3 d-flex justify-content-end">
+                       <div class="row mb-3">
+                            <div class=" d-flex justify-content-end">
                                 <button mat-mini-fab (click)="addpayment()">
                                     <mat-icon class="add-course-btn">add</mat-icon>
                                 </button>
@@ -53,8 +53,15 @@
                                     </mat-select>
                                 </mat-form-field>
                            </div>
-                       </div>
-                       <div formArrayName="add_paymentData" class="mt-4 ">
+                           <div class="col-md-4">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Number</mat-label>
+                                    <input matInput  (keypress)="numberOnly($event)"  formControlName="number"  >
+                                </mat-form-field>
+                           </div>
+                            
+                        </div>
+                       <div formArrayName="paymentData" class="mt-4 ">
                             <ng-container  *ngFor="let quantity of paymentFormData().controls; let i=index" [formGroupName]="i">
                                 <div class="row ">
                                     <div class="col-md-4">
@@ -76,8 +83,8 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6 offset-md-3 d-flex justify-content-end">
+                                <div class="row mb-3">
+                                    <div class=" d-flex justify-content-end">
                                         <button color="primary" mat-mini-fab (click)="removepayment(i)">
                                             <mat-icon  class="add-course-btn">delete</mat-icon>
                                         </button>
@@ -98,6 +105,12 @@
                                             <mat-option  value="month" >Month</mat-option>
                                             <mat-option  value="years" >Years</mat-option>
                                             </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Number</mat-label>
+                                            <input matInput  (keypress)="numberOnly($event)"  formControlName="number" >
                                         </mat-form-field>
                                     </div>
                                 </div>

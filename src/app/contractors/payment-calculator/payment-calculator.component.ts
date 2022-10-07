@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 import { ContractorService } from 'src/app/service/contractor.service';
+import { PaymentService } from 'src/app/service/payment.service';
+import { SnackBarService } from 'src/app/service/snackBar.service';
 
 @Component({
   selector: 'app-payment-calculator',
@@ -17,7 +19,8 @@ export class PaymentCalculatorComponent implements OnInit {
     client:[''],
     percentage:[''],
     type:[''],
-    add_paymentData:this.fb.array([])
+    number:[''],
+    paymentData:this.fb.array([])
   });
   public contractorData:any[] = [];
   public clientData:any[] = [];
@@ -27,9 +30,10 @@ export class PaymentCalculatorComponent implements OnInit {
   private ngUnsubscribe = new Subject<void>();
   constructor(public fb:FormBuilder,
     private api:ContractorService, 
-    private Api:AdminService, 
+    private Api:AdminService,
+    private httpApi:PaymentService, 
     public router: Router,
-    private _snackBar: MatSnackBar,
+    private _snackBar: SnackBarService,
     public route:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -68,8 +72,20 @@ export class PaymentCalculatorComponent implements OnInit {
 
   paymentFormData() : FormArray {  
     // return this.add_payment_form.get("add_paymentData") as FormArray  
-    return this.add_payment_form.controls["add_paymentData"] as FormArray  
+    return this.add_payment_form.controls["paymentData"] as FormArray  
   }  
+  validnumber:boolean = false;
+  numberOnly(e:any){
+    console.log(e);
+    const charCode = (e.which) ? e.which : e.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      this.validnumber = true;
+      return false;
+     
+    }
+    this.validnumber = false;
+    return true;
+  }
 
   newpaymentField(): FormGroup {  
     return this.fb.group({  
@@ -77,6 +93,7 @@ export class PaymentCalculatorComponent implements OnInit {
       client:[''],
       percentage:[''],
       type:[''], 
+      number:[''], 
     })  
   } 
  
@@ -88,7 +105,12 @@ export class PaymentCalculatorComponent implements OnInit {
     this.paymentFormData().removeAt(i);  
   } 
   submit(){
-
+    console.log('jjj',this.add_payment_form.value);
+    // return;
+   this.httpApi.addpayment(this.add_payment_form.value).pipe(takeUntil(this.ngUnsubscribe)).subscribe((e:any)=>{
+    console.log(e);
+    this._snackBar.toster(e.msg);
+   });
   }
 
 }
