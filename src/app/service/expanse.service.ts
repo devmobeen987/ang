@@ -24,6 +24,17 @@ export class ExpanseService {
     return this.http.get<any>(this.url+'/expanse',httpOptions);
   }
 
+  viewexpansetype(){
+    const token = localStorage.getItem('token');
+    const headers_object = new HttpHeaders({ 
+      'Authorization': "Bearer " + token
+    });
+    const httpOptions = {
+      headers: headers_object
+    }
+    return this.http.get<any>(this.url+'/expansetype',httpOptions);
+  }
+
   addExpanse(req:any){
     const token = localStorage.getItem('token');
     const headers_object = new HttpHeaders({ 
@@ -32,7 +43,7 @@ export class ExpanseService {
     const httpOptions = {
       headers: headers_object
     }
-    return this.http.post(this.url+'/expanse/add/',req,httpOptions);
+    return this.http.post(this.url+'/expanse/add',req,httpOptions);
   }
 
   singalExpanse(id:any){

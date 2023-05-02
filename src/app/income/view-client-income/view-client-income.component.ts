@@ -61,8 +61,8 @@ export class ViewClientIncomeComponent implements OnInit {
              'country':e.country,
              'amount':e.amount,
              'tds':tds,
-             'startdate':this.data.startdate,
-             'enddate':this.data.enddate,
+             'startdate':e.startdate,
+             'enddate':e.enddate,
              'discription':e.discription,
              'compdis':this.data.discription
          });

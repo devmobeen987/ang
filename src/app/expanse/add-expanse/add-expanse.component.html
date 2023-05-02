@@ -10,13 +10,13 @@
                 <mat-card-content>
                     <form [formGroup]="add_expanse_form" enctype="multipart/form-data">
                         <div class="row mt-3">
-                            <div class="col-md-3">
-                                <mat-form-field class="example-full-width"  appearance="fill">
+                            <div class="col-md-4">
+                                <mat-form-field   appearance="fill">
                                     <mat-label>Amount</mat-label>
                                     <input matInput  (keypress)="numberOnly($event)"  formControlName="amount" >
                                 </mat-form-field>
                             </div>
-                            <div class="col-md-4 ">
+                            <div class="col-md-4">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Choose Date</mat-label>
                                     <input matInput [matDatepicker]="datepicker"  formControlName="date">
@@ -25,11 +25,18 @@
                                   </mat-form-field>
                             </div>
 
-                            <div class="col-md-3">
-                                <mat-form-field class="example-full-width" appearance="fill">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Type</mat-label>
+                                    <mat-select formControlName="type"> 
+                                    <mat-option [value]="val.id" *ngFor="let val of expansetypelist">{{val.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <!-- <mat-form-field  appearance="fill">
                                     <mat-label>Type</mat-label>
                                     <input matInput   formControlName="type">
-                                </mat-form-field>
+                                </mat-form-field> -->
                             </div>
                         </div>
 

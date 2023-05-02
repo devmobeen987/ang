@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ExpanseRoutingModule } from './expanse-routing.module';
-import { AddExpanseComponent } from './add-expanse/add-expanse.component';
-import { EditExpanseComponent } from './edit-expanse/edit-expanse.component';
-import { ViewExpanseComponent } from './view-expanse/view-expanse.component';
-import { AgGridModule } from 'ag-grid-angular';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SalaryRoutingModule } from './salary-routing.module';
+import { SalaryComponent } from './viewsalary/salary.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -20,20 +17,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { AddEditButtonComponent } from './add-edit-button/add-edit-button.component';
 
 
 @NgModule({
   declarations: [
-    AddExpanseComponent,
-    EditExpanseComponent,
-    ViewExpanseComponent,
-    AddEditButtonComponent
+    SalaryComponent
   ],
   imports: [
     CommonModule,
-    ExpanseRoutingModule,
-    AgGridModule  ,
+    SalaryRoutingModule,
     ReactiveFormsModule,
     MatInputModule,
     MatDatepickerModule,
@@ -47,8 +39,7 @@ import { AddEditButtonComponent } from './add-edit-button/add-edit-button.compon
     MatPaginatorModule,
     MatSortModule,
     MatIconModule,
-    FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ]
 })
-export class ExpanseModule { }
+export class SalaryModule { }

@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ColDef, GridApi, GridReadyEvent, IServerSideDatasource, IServerSideGetRowsRequest } from 'ag-grid-community';
+import { ColDef, GridApi, GridReadyEvent,  } from 'ag-grid-community';
 import { Subject, takeUntil } from 'rxjs';
 import { ExpanseService } from 'src/app/service/expanse.service';
 import { AddEditButtonComponent } from '../add-edit-button/add-edit-button.component';
-import 'ag-grid-enterprise';
+ 
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-view-expanse',
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class ViewExpanseComponent implements OnInit {
 
   private ngUnsubscribe = new Subject<void>();
-
+ 
   columnDefs: ColDef[] = [
     { field: 'id' },
     { field: 'amount' },

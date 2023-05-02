@@ -29,6 +29,19 @@ export class PaymentService {
         );
   }
 
+  viewsalary(req:any){
+    const token = localStorage.getItem('token');
+    const headers_object = new HttpHeaders({ 
+      'Authorization': "Bearer " + token
+    });
+    const httpOptions = {
+      headers: headers_object
+    }
+    return this.http.get<any>(this.url+'/viewsalary/',req).pipe(
+        catchError(this.handleError)
+        );
+  }
+
   handleError(error: HttpErrorResponse){
     let errorMessage = '';
      console.log('mm',error);

@@ -1,0 +1,36 @@
+<p>salary works!</p>
+<h1>this is salary calculate page </h1>
+<div class="container card_width my-3">
+    <mat-card class="example-card">
+        <mat-card-header >
+            <form [formGroup]="salary_form" enctype="multipart/form-data">
+                <div class="row mt-0">
+                    <div class="col-md-5">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose Month</mat-label>
+                            <mat-select  formControlName="month" >
+                                <mat-option [value]="i+1" *ngFor="let val of Month; let i = index" >{{val}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-5">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose Years</mat-label>
+                            <mat-select formControlName="year" >
+                                <mat-option [value]="val" *ngFor='let val of Years ;let i = index'>{{val}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class=" col-md-2 my-3">
+                        <button class="btn btn-primary" (click)="calculate()">submit</button>
+                    </div>
+                </div>
+            </form>
+           
+          </mat-card-header>
+          <mat-card-content>
+
+          </mat-card-content>
+    </mat-card>
+</div>
+

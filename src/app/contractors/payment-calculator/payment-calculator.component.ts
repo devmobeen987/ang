@@ -15,11 +15,11 @@ import { SnackBarService } from 'src/app/service/snackBar.service';
 })
 export class PaymentCalculatorComponent implements OnInit {
   public add_payment_form = this.fb.group({
-    contractor:[''],
-    client:[''],
-    percentage:[''],
-    type:[''],
-    number:[''],
+    // contractor:[''],
+    // client:[''],
+    // percentage:[''],
+    // type:[''],
+    // number:[''],
     paymentData:this.fb.array([])
   });
   public contractorData:any[] = [];
@@ -39,6 +39,7 @@ export class PaymentCalculatorComponent implements OnInit {
   ngOnInit(): void {
     this.loadecontractorApi();
     this.loadeClientApi();
+    this.addpayment();
   }
 
   loadecontractorApi(){

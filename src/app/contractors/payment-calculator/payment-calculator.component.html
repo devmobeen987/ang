@@ -9,7 +9,7 @@
                 </mat-card-header>
                 <mat-card-content>
                     <form [formGroup]="add_payment_form" enctype="multipart/form-data">
-                       <div class="row my-2">
+                       <!-- <div class="row my-2">
                            <div class="col-md-4">
                                 <div class="col-md-4">
                                     <mat-form-field appearance="fill">
@@ -60,9 +60,19 @@
                                 </mat-form-field>
                            </div>
                             
+                        </div> -->
+                        <div class="row">
+                            <div class="row mb-3">
+                                <div class=" d-flex justify-content-end">
+                                    <button mat-mini-fab (click)="addpayment()">
+                                        <mat-icon class="add-course-btn">add</mat-icon>
+                                    </button>
+                                </div>
+                           </div>
                         </div>
-                       <div formArrayName="paymentData" class="mt-4 ">
+                        <div formArrayName="paymentData" class="mt-4 ">
                             <ng-container  *ngFor="let quantity of paymentFormData().controls; let i=index" [formGroupName]="i">
+                               
                                 <div class="row ">
                                     <div class="col-md-4">
                                         <div class="col-md-4">
@@ -83,7 +93,7 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row mb-3" *ngIf="i>0">
                                     <div class=" d-flex justify-content-end">
                                         <button color="primary" mat-mini-fab (click)="removepayment(i)">
                                             <mat-icon  class="add-course-btn">delete</mat-icon>

@@ -20,6 +20,7 @@ export class AddExpanseComponent implements OnInit {
   type:[''],
   tds:['']
 });
+public expansetypelist:any = '';
 constructor(
   private fb:FormBuilder,
   public api:ExpanseService,
@@ -29,8 +30,15 @@ constructor(
   ) { }
 
   ngOnInit(): void {
+    this.loadeapi();
   }
 
+  loadeapi(){
+    this.api.viewexpansetype().pipe(takeUntil(this.ngUnsubscribe)).subscribe((e:any)=>{
+      console.log(';;;;;lll',e.data)
+      this.expansetypelist = e.data;
+    })
+  }
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   durationInSeconds = 2;

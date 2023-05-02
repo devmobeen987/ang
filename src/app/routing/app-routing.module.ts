@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'account', loadChildren: () => import('../account/account.module').then(m =>m.AccountModule)},
   { path: 'contractor', loadChildren: () => import('../contractors/contractors.module').then(m =>m.ContractorsModule)},
   { path: 'incomedashbord', loadChildren: () => import('../component/income-dashboard/income-dashboard.module').then(m =>m.IncomeDashboardModule)},
+  { path: 'salary', loadChildren: () => import('../salary/salary.module').then(m =>m.SalaryModule)},
 ];
 
 @NgModule({
