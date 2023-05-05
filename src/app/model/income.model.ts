@@ -19,6 +19,7 @@ export interface incomeList {
     amount:number;
     ci_descr: string;
     ci_id?:number;
+    account_id?:number;
     clientID:number;
     companyID:number;
     discription: string;

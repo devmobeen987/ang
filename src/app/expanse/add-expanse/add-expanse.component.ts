@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AccountdetailApi, AccountresponsApi } from 'src/app/model/account.model';
+import { AccountService } from 'src/app/service/account.service';
 import { ExpanseService } from 'src/app/service/expanse.service';
 
 @Component({
@@ -18,26 +20,41 @@ export class AddExpanseComponent implements OnInit {
   amount:[''],
   date:[''],
   type:[''],
+  account_id:[''],
   tds:['']
 });
-public expansetypelist:any = '';
+public expensetypelist:any;
 constructor(
   private fb:FormBuilder,
   public api:ExpanseService,
   public router: Router,
   public dialog: MatDialog,
-  private _snackBar: MatSnackBar
+  private _snackBar: MatSnackBar,
+  private accountService: AccountService
+
   ) { }
 
   ngOnInit(): void {
     this.loadeapi();
+    this.loadAccount();
   }
 
   loadeapi(){
     this.api.viewexpansetype().pipe(takeUntil(this.ngUnsubscribe)).subscribe((e:any)=>{
       console.log(';;;;;lll',e.data)
-      this.expansetypelist = e.data;
+      this.expensetypelist = e.data;
     })
+  }
+  public accountData: AccountdetailApi[] = [];
+
+  loadAccount() {
+    this.accountService.viewAccount().subscribe({
+      next: (e: AccountresponsApi) => {
+        this.accountData = e.data;
+        console.log(this.accountData);
+      },
+      error: (e) => {}
+    });
   }
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -52,6 +69,7 @@ constructor(
       type: this.add_expanse_form.value.type,
       date:data,
       tds:this.add_expanse_form.value.tds,
+      account_id:this.add_expanse_form.value.account_id,
 
     }
     console.log(paylode);

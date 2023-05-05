@@ -19,7 +19,7 @@ export class ViewExpanseComponent implements OnInit {
     { field: 'id' },
     { field: 'amount' },
     { field: 'date' },
-    { field: 'type' },
+    { field: 'expense_type.name', headerName: 'Type Name' },
     { field: 'tds' },
     { field: 'discription' },
     { field: 'Action', cellRenderer: AddEditButtonComponent },

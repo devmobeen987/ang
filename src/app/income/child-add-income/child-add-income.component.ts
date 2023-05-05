@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AccountdetailApi } from 'src/app/model/account.model';
 
 @Component({
   selector: 'app-child-add-income',
@@ -11,9 +12,9 @@ export class ChildAddIncomeComponent implements OnInit {
   @Input() clientName:any;
   @Input()
   form: any;
-  @Input()
-  incomeData!: FormArray;
-  @Input() index:any;
+  @Input()incomeData!: FormArray;
+  @Input()accounts: AccountdetailApi[]=[];
+  @Input()index:any;
   // @Input() incomeData:any;
   @Output() newItemEvent = new EventEmitter<string>();
   @Output() deleteItemEvent = new EventEmitter<string>();

@@ -29,7 +29,7 @@ export class IncomeDashbordComponent implements OnInit {
   // start
 
   public fullMonthName: any[] = [];
-  public expanseAmount: any[] = [];
+  public expanseAmount: any = {};
   public lineChartOptions: ChartConfiguration['options'] = {
     elements: {
       line: {
@@ -94,40 +94,65 @@ export class IncomeDashbordComponent implements OnInit {
       console.log('jk', req);
       const res = req[0].data
       const res2 = req[1].data
-      res.forEach((e: any) => {
-        console.log(e.date);
-        let d: any = new Date(e.date);
-        this.fullMonthName.push(monthNames[d.getMonth()]);
-        this.expanseAmount.push(e.amount);
-      });
-
-      datasets1.push({
-        data: this.expanseAmount,
-        label: 'Expanse'
-      });
+    
       let fullMonthName: any = [];
       let incometotal: any = {};
       res2.forEach((e: any) => {
-        let d: any = new Date(e.startdate);
-        
-        const month = monthNames[d.getMonth()]
-        fullMonthName.push(monthNames[d.getMonth()+1]);
+        let d: any = new Date(e.startdate.replaceAll('-','/'));
+        const m = d.getMonth();
+        const month = monthNames[m]
+        console.log( e.startdate, month, d.getMonth());
+        fullMonthName.push(monthNames[d.getMonth()]);
         
         if(!incometotal[month]){
+
           incometotal[month] = Number(e.amount)
-         
+
         }else{
+
           incometotal[month] = Number(e.amount) + incometotal[month];
           console.log(incometotal[month])
+
         }
         // incometotal.push(e.amount);
       });
 
+      
+      const expenseTotal = []
+      res.forEach((e: any) => {
+        
+        let d: any = new Date(e.date.replaceAll('-','/'));
+        const month = monthNames[d.getMonth()]
+        
+        if(!this.expanseAmount[month]){
+
+          this.expanseAmount[month] = Number(e.amount)
+          console.log(d.getMonth()+1,monthNames[d.getMonth()],e.amount)
+          this.fullMonthName.push(monthNames[d.getMonth()]);
+
+        }else{
+          console.log(d.getMonth(),e.date,monthNames[d.getMonth()],e.amount)
+          this.expanseAmount[month] = Number(e.amount) + this.expanseAmount[month]
+           
+        }
+        // this.expanseAmount.push(e.amount);
+      });
+      const expenseAmount:any = [];
+      Object.keys(incometotal).forEach((e)=>{
+        if (this.expanseAmount[e]) {
+          expenseAmount.push(this.expanseAmount[e])
+        } else {
+          expenseAmount.push('')
+        }
+      })
+      datasets1.push({
+        data: expenseAmount,
+        label: 'Expanse'
+      });
       datasets1.push({
         data: Object.values(incometotal),
         label: 'Income'
       });
-      console.log('fullMonthName', incometotal)
       this.lineChartData.datasets = datasets1;
       this.lineChartData.labels = Object.keys(incometotal);
       this.chart?.update();

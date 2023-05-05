@@ -1,37 +1,45 @@
-
-    <div [formGroup]="form" >
-        <div class="row mt-3">
-            <div class="col-md-3 mt-3 mx-1">
-                <mat-form-field appearance="fill">
-                    <mat-label>Client Name</mat-label> 
-                    <mat-select formControlName="clientID" > 
-                        <mat-option  value="{{val.id}}" *ngFor="let val of clientName" >{{val.firstname}} {{val.lastname}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="col-md-3 mt-3 mx-2">
-                <mat-form-field class="example-full-width"  appearance="fill">
-                    <mat-label>Amount</mat-label>
-                    <input matInput  (keypress)="numberOnly($event)"  formControlName="amount"  >
-                </mat-form-field>
-            </div>
-            <div class="col-md-4 mx-3">
-                <label for="Discription"  class="form-group">Discription</label>
-                <textarea class="form-control" row="3" formControlName="discription"></textarea>
-            </div>
-            <div class="col-md-1">
-                <button class="mt-4"  color="primary" mat-mini-fab (click)="deleterow(index)">
-                    <mat-icon  class="add-course-btn">delete</mat-icon>
-                </button>
-            </div>
-            <div class="row col-md-3 ml-2">
-                <mat-label>Add TDS Amount</mat-label>
-                <mat-form-field class="example-full-width"  appearance="fill">
-                    <mat-label>Enter Amount</mat-label>
-                    <input matInput  (keypress)="numberOnly($event)"  formControlName="tds"  >
-                </mat-form-field>
-            </div>
-           
+<div [formGroup]="form">
+    <div class="row mt-3">
+        <div class="col-md-3 mt-3 mx-1">
+            <mat-form-field appearance="fill">
+                <mat-label>Client Name</mat-label>
+                <mat-select formControlName="clientID">
+                    <mat-option value="{{val.id}}" *ngFor="let val of clientName">{{val.firstname}}
+                        {{val.lastname}}</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
-    </div>
+        <div class="col-md-3 mt-3 mx-2">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Amount</mat-label>
+                <input matInput (keypress)="numberOnly($event)" formControlName="amount">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3 mt-3 mx-2">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Account</mat-label>
+                <mat-select formControlName="account_id"
+                    [class.is-invalid]="form.get('account_id')?.valid ||form.get('account_id')?.touched">
+                    <mat-option [value]="val.id" *ngFor="let val of accounts">{{val.account_name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4 mx-3">
+            <label for="Discription" class="form-group">Description</label>
+            <textarea class="form-control" row="3" formControlName="discription"></textarea>
+        </div>
+        <div class="col-md-1">
+            <button class="mt-4" color="primary" mat-mini-fab (click)="deleterow(index)">
+                <mat-icon class="add-course-btn">delete</mat-icon>
+            </button>
+        </div>
+        <div class="row col-md-3 ml-2">
+            <mat-label>Add TDS Amount</mat-label>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Enter Amount</mat-label>
+                <input matInput (keypress)="numberOnly($event)" formControlName="tds">
+            </mat-form-field>
+        </div>
 
+    </div>
+</div>

@@ -26,15 +26,26 @@
                             </div>
 
                             <div class="col-md-3">
-                                <mat-form-field class="example-full-width" appearance="fill">
+                                <mat-form-field appearance="fill">
                                     <mat-label>Type</mat-label>
-                                    <input matInput   formControlName="type">
+                                    <mat-select formControlName="type"> 
+                                    <mat-option [value]="val.id" *ngFor="let val of expensetypelist">{{val.name}}</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-4">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Account</mat-label>
+                                    <mat-select formControlName="account_id"
+                                        >
+                                        <mat-option [value]="val.id" *ngFor="let val of accountData">{{val.account_name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
                                 <label for="Discription"  class="form-group">Discription</label>
                                 <textarea class="form-control" row="3" formControlName="discription"></textarea>
                             </div>
