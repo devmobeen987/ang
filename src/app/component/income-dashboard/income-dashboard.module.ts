@@ -14,12 +14,15 @@ import { RouterModule } from '@angular/router';
 import { NgChartsModule } from 'ng2-charts';
 import { IncomeDashbordComponent } from './income-dashbord/income-dashbord.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
-
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [IncomeDashbordComponent],
   imports: [
     CommonModule,
+    MatButtonModule,
+    MatIconModule,
     IncomeDashboardRoutingModule,
     MatButtonToggleModule,
     MatToolbarModule,
@@ -35,6 +38,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     NgChartsModule,
     MatSnackBarModule,
+    MatTabsModule
   ]
 })
 export class IncomeDashboardModule { }

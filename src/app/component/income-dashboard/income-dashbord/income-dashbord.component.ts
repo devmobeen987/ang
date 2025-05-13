@@ -7,14 +7,19 @@ import { BaseChartDirective } from 'ng2-charts';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
 import { AdminService } from 'src/app/service/admin.service';
 import { ExpanseService } from 'src/app/service/expanse.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-income-dashbord',
   templateUrl: './income-dashbord.component.html',
   styleUrls: ['./income-dashbord.component.scss']
 })
 export class IncomeDashbordComponent implements OnInit {
- public url = "http://127.0.0.1:8000/api";
+//  public url = "http://127.0.0.1:8000/api";
  //public url = "https://imaclowd.com/atendenceproject/api";
+ url = environment.apiURL;
+ currentYear:number = new Date().getFullYear();
+ currentMonth:number = new Date().getMonth();
+ month:any[] = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   public lineChartData: ChartConfiguration['data'] = {
@@ -61,14 +66,17 @@ export class IncomeDashbordComponent implements OnInit {
   durationInSeconds = 2;
   // end
   private ngUnsubscribe = new Subject<void>();
-
+  monthname:string = '';
   constructor(private api:ExpanseService,
      private servies:AdminService,
      private http: HttpClient,
      public router:Router,
-     private _snackBar: MatSnackBar) { }
+     private _snackBar: MatSnackBar) { 
+       this.monthname = this.month[this.currentMonth];
+     }
 
   ngOnInit(): void {
+    console.log(this.currentMonth);
    this.loadeapi();
   }
 
@@ -82,9 +90,16 @@ export class IncomeDashbordComponent implements OnInit {
       const httpOptions = {
         headers: headers_object
       }
+
       const parllelApi = [];
-      const data1 = this.http.get<any>(this.url+'/expanse/totalexpansedashbord',httpOptions);
-      const data2 = this.http.get<any>(this.url+'/income/totaldashbord',httpOptions);
+      const req = {
+        'year':this.currentYear,
+        'month':this.currentMonth+1,
+        'is_month':this.isShowMonth
+      }
+      
+      const data1 = this.http.post<any>(this.url+'/expanse/totalexpansedashbord',req,httpOptions);
+      const data2 = this.http.post<any>(this.url+'/income/totaldashbord',req,httpOptions);
       let monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"];  
       parllelApi.push(data1);
       parllelApi.push(data2);
@@ -121,6 +136,7 @@ export class IncomeDashbordComponent implements OnInit {
         this.chart?.update();
         // this.lineChartData.labels = fullMonthName; 
         console.log('iji',this.lineChartData);
+        // console.log('sd',)
       },
       (err)=>{
         console.log('dkd',err);
@@ -179,6 +195,40 @@ export class IncomeDashbordComponent implements OnInit {
 
   public chartHovered({ event, active }: { event?: ChartEvent, active?: {}[] }): void {
     // console.log(event, active);
+  }
+
+  previous(){
+    if(this.isShowMonth){
+      this.currentMonth = this.currentMonth-1;
+      this.monthname = this.month[this.currentMonth];
+      this.loadeapi();
+    }else{
+      this.currentYear = this.currentYear-1;
+      this.loadeapi();
+    }
+
+  }
+  next(){
+    if(this.isShowMonth){
+      this.currentMonth = this.currentMonth+1;
+      this.monthname = this.month[this.currentMonth];
+      this.loadeapi();
+
+    }else{
+      this.currentYear = this.currentYear+1;
+      this.loadeapi();
+    }
+
+  }
+  isShowMonth:boolean = false;
+  fetchdetail(e:string){
+    if(e=='month'){
+      this.isShowMonth = true;
+      this.loadeapi();
+    }else{
+      this.loadeapi();
+      this.isShowMonth = false;
+    }
   }
 
 }

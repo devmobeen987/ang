@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -8,7 +9,8 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ExpanseService {
   // url = "http://127.0.0.1:8000/api";
-  url = "https://imaclowd.com/atendenceproject/api";
+  // url = "https://imaclowd.com/atendenceproject/api";
+  url = environment.apiURL;
   pipe: any;
   constructor(private http: HttpClient) { }
 
@@ -58,6 +60,7 @@ export class ExpanseService {
   }
 
   expanseDashbordTotal(){
+    console.log('asd');
     const token = localStorage.getItem('token');
     const headers_object = new HttpHeaders({ 
       'Authorization': "Bearer " + token
