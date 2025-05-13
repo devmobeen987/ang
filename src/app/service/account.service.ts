@@ -2,13 +2,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {  ApiResponseData, ApiResponseMsg } from '../model/account.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
   // url = "http://127.0.0.1:8000/api";
-  url = "https://imaclowd.com/atendenceproject/api";
+  // url = "https://imaclowd.com/atendenceproject/api";
+  url = environment.apiURL;
   pipe: any;
   constructor(private http: HttpClient) { }
 

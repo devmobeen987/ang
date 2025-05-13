@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { catchError, Observable, Subject, throwError } from 'rxjs';
 import { ApiResponseMsg } from '../model/account.model';
 import { AddContractorApi } from '../model/contractor.model';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -10,7 +11,8 @@ import { AddContractorApi } from '../model/contractor.model';
 })
 export class ContractorService {
   // url = "http://127.0.0.1:8000/api";
-  url = "https://imaclowd.com/atendenceproject/api";
+  // url = "https://imaclowd.com/atendenceproject/api";
+  url = environment.apiURL;
   pipe: any;
   constructor(private http: HttpClient) { }
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
+import {environment} from "./../../environments/environment"
 
 
 @Injectable({
@@ -9,9 +10,12 @@ import { Observable, ReplaySubject, Subject } from 'rxjs';
 export class AdminService {
 
   // url = "http://127.0.0.1:8000/api";
-  url = "https://imaclowd.com/atendenceproject/api";
+  // url = "https://imaclowd.com/atendenceproject/api";
+  url = environment.apiURL;
   pipe: any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient ) {
+    // console.log(environment.apiURL);
+  }
 
   username = new Subject<any>();
   totalemployee = new Subject<any>();
